@@ -46,12 +46,15 @@ export const useRegisterForm = (): IRegisterForm => {
 
       setModalAuth('closed')
 
-      await CrewApi.post('userRoute/register', {
-        id: (await supabase.auth.getUser()).data.user?.id,
-        email: data.email,
-        name: data.firstName,
-        lastName: data.lastName,
-      })
+      await CrewApi.post(
+        'https://backcrew-production.up.railway.app/userRoute/register',
+        {
+          id: (await supabase.auth.getUser()).data.user?.id,
+          email: data.email,
+          name: data.firstName,
+          lastName: data.lastName,
+        }
+      )
     } catch (error) {
       console.log(error)
     }
