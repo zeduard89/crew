@@ -8,7 +8,7 @@ import { useModalAuthStore } from '@/store'
 import { supabase } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, type SubmitHandler } from 'react-hook-form'
-import { useHistory } from 'react-router-dom' // Guille
+import { useNavigate } from 'react-router-dom'
 
 export const useRegisterForm = (): IRegisterForm => {
   const {
@@ -20,7 +20,7 @@ export const useRegisterForm = (): IRegisterForm => {
     resolver: zodResolver(RegisterValidation),
     mode: 'onBlur',
   })
-  const history = useHistory() // Guille
+  const navigate = useNavigate() // Guille
 
   const { setModalAuth } = useModalAuthStore()
 
@@ -47,16 +47,14 @@ export const useRegisterForm = (): IRegisterForm => {
       if (loginError != null) throw loginError
 
       setModalAuth('closed')
-      const response = await CrewApi.post('/userRoute/register', {
+      await CrewApi.post('/userRoute/register', {
         id: (await supabase.auth.getUser()).data.user?.id,
         email: data.email,
         name: data.firstName,
         lastName: data.lastName,
       })
 
-      if (response.data === 'User was registered successfully') {
-        history.push('/home')
-      }
+      navigate('/home')
     } catch (error) {
       console.log(error)
     }
