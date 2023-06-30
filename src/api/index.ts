@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const URL = import.meta.env.VITE_CREWDB_URL ?? 'http://localhost:3001'
+const URL = 'http://localhost:3001'
+// import.meta.env.VITE_CREWDB_URL ??
 
 export const CrewApi = axios.create({
   baseURL: URL,
