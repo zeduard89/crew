@@ -8,7 +8,6 @@ import { useModalAuthStore } from '@/store'
 import { supabase } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, type SubmitHandler } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 
 export const useRegisterForm = (): IRegisterForm => {
   const {
@@ -20,7 +19,6 @@ export const useRegisterForm = (): IRegisterForm => {
     resolver: zodResolver(RegisterValidation),
     mode: 'onBlur',
   })
-  const navigate = useNavigate() // Guille
 
   const { setModalAuth } = useModalAuthStore()
 
@@ -54,7 +52,7 @@ export const useRegisterForm = (): IRegisterForm => {
         lastName: data.lastName,
       })
 
-      navigate('/home')
+      window.location.reload() // Recargar la página
     } catch (error) {
       console.log(error)
     }
