@@ -1,0 +1,6 @@
+export * from './FavoritesCarrousel/FavoritesCarrousel'
+export * from './Footer/Footer'
+export * from './Layout'
+export * from './NavBar/NavBar'
+export * from './ProjectCard/ProjectCard'
+export * from './QueryProvider'

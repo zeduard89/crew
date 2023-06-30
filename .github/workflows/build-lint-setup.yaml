@@ -1,0 +1,42 @@
+name: Build, Lint and Setup
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  build-lint-setup:
+    name: Build, Lint and Setup
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+        pnpm-version: [8.6.0]
+    steps:
+      # Clones the repository
+      - uses: actions/checkout@v3
+
+      # Sets up pnpm
+      - uses: pnpm/action-setup@v2
+        with:
+          version: ${{matrix.pnpm-version}}
+
+      # Sets up Node.js and caches with pnpm
+      - name: Use Node.js ${{matrix.node-version}}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.node-version}}
+          cache: 'pnpm'
+
+      # Installs dependencies using pnpm
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+        # Runs lint using pnpm
+      - name: Lint
+        run: pnpm lint
+
+      # Builds the project using pnpm
+      - name: Build
+        run: pnpm build
