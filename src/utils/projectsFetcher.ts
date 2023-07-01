@@ -24,7 +24,7 @@ export const projectsFetcher: IProjectsFetcher = async ({ path, params }) => {
 
   const projects = data?.map((project) => ({
     ...project,
-    mainImage: images[Math.floor(Math.random() * images.length)],
+    // mainImage: images[Math.floor(Math.random() * images.length)],
   }))
 
   return projects

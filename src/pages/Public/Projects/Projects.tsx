@@ -55,7 +55,7 @@ export const Projects: React.FC = () => {
                     {numberToUSD(project.fundingCurrent)}
                   </span>
                   <p className='ml-2 text-xs font-semibold uppercase text-gray-500'>
-                    USD
+                    ARG
                   </p>
                 </div>
                 <p className='text-sm font-semibold uppercase text-gray-500'>
