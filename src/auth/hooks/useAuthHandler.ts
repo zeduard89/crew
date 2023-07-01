@@ -12,6 +12,7 @@ export const useAuthHandler = (): void => {
       }
     })
   }, [setUserId])
+  window.location.reload() // Recargar la página
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {
