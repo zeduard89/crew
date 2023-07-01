@@ -22,19 +22,19 @@ interface IModalAuthStore {
   setModalAuth: (modalAuth: 'closed' | 'login' | 'register') => void
 }
 
-// export const useModalAuthStore = create<IModalAuthStore>((set) => ({
-//   modalAuth: 'closed',
-//   setModalAuth: (modalAuth) => {
-//     set({ modalAuth })
-//   },
-// }))
-
 export const useModalAuthStore = create<IModalAuthStore>((set) => ({
   modalAuth: 'closed',
-  setModalAuth: async (modalAuth) => {
-    await new Promise<void>((resolve) => {
-      set({ modalAuth })
-      resolve()
-    })
+  setModalAuth: (modalAuth) => {
+    set({ modalAuth })
   },
 }))
+
+// export const useModalAuthStore = create<IModalAuthStore>((set) => ({
+//   modalAuth: 'closed',
+//   setModalAuth: async (modalAuth) => {
+//     await new Promise<void>((resolve) => {
+//       set({ modalAuth })
+//       resolve()
+//     })
+//   },
+// }))
