@@ -24,6 +24,7 @@ export const useAuthHandler = (): void => {
       }
       if (event === 'SIGNED_OUT') {
         setUserId('')
+        window.location.reload() // Reload the page on sign out
       }
     })
   }, [setUserId])

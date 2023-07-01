@@ -28,13 +28,3 @@ export const useModalAuthStore = create<IModalAuthStore>((set) => ({
     set({ modalAuth })
   },
 }))
-
-// export const useModalAuthStore = create<IModalAuthStore>((set) => ({
-//   modalAuth: 'closed',
-//   setModalAuth: async (modalAuth) => {
-//     await new Promise<void>((resolve) => {
-//       set({ modalAuth })
-//       resolve()
-//     })
-//   },
-// }))
