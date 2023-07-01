@@ -12,7 +12,7 @@ export const useUserIdStore = create<IUserIdStore>((set) => ({
   setUserId: (userId: string) => {
     setTimeout(() => {
       set({ userId, isLoaded: true })
-    }, 1000) // Demora de 1 segundo (1000 milisegundos)
+    }, 2500) // Demora de 1 segundo (1000 milisegundos)
     // Mira como parcho tu codigo
   },
 }))
