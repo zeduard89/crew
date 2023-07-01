@@ -6,13 +6,6 @@ interface IUserIdStore {
   setUserId: (userId: string) => void
 }
 
-// export const useUserIdStore = create<IUserIdStore>((set) => ({
-//   userId: '',
-//   setUserId: (userId: string) => {
-//     set({ userId })
-//   },
-// }))
-
 export const useUserIdStore = create<IUserIdStore>((set) => ({
   userId: '',
   isLoaded: false,
@@ -20,6 +13,7 @@ export const useUserIdStore = create<IUserIdStore>((set) => ({
     setTimeout(() => {
       set({ userId, isLoaded: true })
     }, 1000) // Demora de 1 segundo (1000 milisegundos)
+    // Mira como parcho tu codigo
   },
 }))
 
