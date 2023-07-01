@@ -1,5 +1,5 @@
 import { CrewApi } from '@/api'
-import { images } from '@/data'
+// import { images } from '@/data'
 import { type IProject } from '@/interfaces'
 import { useQuery } from '@tanstack/react-query'
 
@@ -16,9 +16,12 @@ export const getProjects = async (): Promise<IProject[]> => {
     return []
   }
 
-  const projects = data?.map((project, index) => ({
+  // const projects = data?.map((project, index) => ({
+  //   ...project,
+  //   mainImage: images[index % 4],
+  // }))
+  const projects = data?.map((project) => ({
     ...project,
-    mainImage: images[index % 4],
   }))
 
   return projects
