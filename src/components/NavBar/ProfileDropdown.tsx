@@ -53,7 +53,7 @@ export const ProfileDropdown: React.FC = () => {
             <div className='absolute right-0 top-0 z-10 mt-12 flex h-auto w-[150px] flex-col items-end justify-end rounded-b-xl bg-primary pr-12 pt-6'>
               <ul className=' last:mb-4'>
                 <li className='mb-2'>
-                  <button
+                  {/* <button
                     className='text-white duration-300 ease-in-out hover:scale-95 hover:text-secondary'
                     onClick={() => {
                       navigate(`/userProfile/${userId}`)
@@ -70,7 +70,7 @@ export const ProfileDropdown: React.FC = () => {
                         '/search?category=Tech+%26+Innovation&sort=Trending&q=&s=20&p=0'
                       )
                     }}
-                  >
+                  > */}
                     Settings
                   </button>
                 </li>
