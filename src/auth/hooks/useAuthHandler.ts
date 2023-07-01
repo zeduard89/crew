@@ -11,6 +11,7 @@ export const useAuthHandler = (): void => {
         setUserId(data.session.user.id)
       }
     })
+    window.location.reload() // Recargar la página
   }, [setUserId])
 
   useEffect(() => {

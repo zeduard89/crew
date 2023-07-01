@@ -51,8 +51,6 @@ export const useRegisterForm = (): IRegisterForm => {
         name: data.firstName,
         lastName: data.lastName,
       })
-
-      window.location.reload() // Recargar la página
     } catch (error) {
       console.log(error)
     }
