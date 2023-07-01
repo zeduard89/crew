@@ -46,12 +46,6 @@ export const useProjectForm = (): IProjectForm => {
           files.append('files', file)
         })
 
-        // // SUBO
-        // await fetch('http://localhost:3001/projectRoute/superImage', {
-        //   method: 'POST',
-        //   body: files,
-        // })
-        // SUBO
         await CrewApi.post('/projectRoute/superImage', {
           files,
         })

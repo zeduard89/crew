@@ -89,7 +89,7 @@ export const ProjectForm: React.FC = () => {
           label='Location'
           errors={errors}
           defaultOption='Select a location'
-          options={['Argentina']}
+          options={['Argentina','Mexico']}
         />
 
         <div className='my-4 mb-6 flex flex-col'>
