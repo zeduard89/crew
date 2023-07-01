@@ -52,7 +52,7 @@ export const ProfileDropdown: React.FC = () => {
           <>
             <div className='absolute right-0 top-0 z-10 mt-12 flex h-auto w-[150px] flex-col items-end justify-end rounded-b-xl bg-primary pr-12 pt-6'>
               <ul className=' last:mb-4'>
-                {/* <li className='mb-2'>
+                <li className='mb-2'>
                   <button
                     className='text-white duration-300 ease-in-out hover:scale-95 hover:text-secondary'
                     onClick={() => {
@@ -61,8 +61,8 @@ export const ProfileDropdown: React.FC = () => {
                   >
                     Profile
                   </button>
-                </li> */}
-                <li className='mb-2'>
+                </li>
+                {/* <li className='mb-2'>
                   <button
                     className='text-white duration-300 ease-in-out hover:scale-95 hover:text-secondary'
                     onClick={() => {
@@ -73,7 +73,7 @@ export const ProfileDropdown: React.FC = () => {
                   >
                     Settings
                   </button>
-                </li>
+                </li> */}
                 <li className='mb-2'>
                   <button
                     className='text-white duration-300 ease-in-out hover:scale-95 hover:text-secondary'
