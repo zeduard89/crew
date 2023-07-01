@@ -15,9 +15,11 @@ interface IUserIdStore {
 
 export const useUserIdStore = create<IUserIdStore>((set) => ({
   userId: '',
-  isLoaded: false, // Nuevo estado para controlar si se ha recibido una respuesta
+  isLoaded: false,
   setUserId: (userId: string) => {
-    set({ userId, isLoaded: true }) // Marcar como cargado cuando se establece el userId
+    setTimeout(() => {
+      set({ userId, isLoaded: true })
+    }, 1000) // Demora de 1 segundo (1000 milisegundos)
   },
 }))
 

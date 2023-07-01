@@ -12,7 +12,7 @@ export const NavBar: React.FC = () => {
   const navigate = useNavigate()
   const location = useLocation().pathname
   useAuthHandler()
-  const { userId, isLoaded} = useUserIdStore()
+  const {  isLoaded} = useUserIdStore()
   const { modalAuth, setModalAuth } = useModalAuthStore()
 
   return (
