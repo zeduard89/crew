@@ -12,7 +12,7 @@ export const NavBar: React.FC = () => {
   const navigate = useNavigate()
   const location = useLocation().pathname
   useAuthHandler()
-  const { userId } = useUserIdStore()
+  const { userId, isLoaded} = useUserIdStore()
   const { modalAuth, setModalAuth } = useModalAuthStore()
 
   return (
@@ -40,7 +40,7 @@ export const NavBar: React.FC = () => {
               Start a project
             </Link>
           </div>
-          {userId.length === 0 && (
+          {isLoaded && (
             <>
               <button
                 className='cursor-pointer select-none duration-300 hover:text-secondary active:scale-95'
@@ -61,7 +61,7 @@ export const NavBar: React.FC = () => {
               </button>
             </>
           )}
-          {userId.length > 0 && (
+          {!isLoaded  && (
             <div className='flex items-center'>
               
               <ProfileDropdown />
