@@ -25,6 +25,8 @@ interface IModalAuthStore {
 export const useModalAuthStore = create<IModalAuthStore>((set) => ({
   modalAuth: 'closed',
   setModalAuth: (modalAuth) => {
-    set({ modalAuth })
+    setTimeout(() => {
+      set({ modalAuth })
+    }, 1000) // Otro parchecito
   },
 }))

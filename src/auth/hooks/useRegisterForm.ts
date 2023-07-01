@@ -43,7 +43,7 @@ export const useRegisterForm = (): IRegisterForm => {
       })
 
       if (loginError != null) throw loginError
-      console.log(data)
+
       setModalAuth('closed')
       await CrewApi.post('/userRoute/register', {
         id: (await supabase.auth.getUser()).data.user?.id,
