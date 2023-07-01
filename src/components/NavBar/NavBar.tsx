@@ -40,7 +40,7 @@ export const NavBar: React.FC = () => {
               Start a project
             </Link>
           </div>
-          {isLoaded && (
+          {!isLoaded && (
             <>
               <button
                 className='cursor-pointer select-none duration-300 hover:text-secondary active:scale-95'
@@ -61,7 +61,7 @@ export const NavBar: React.FC = () => {
               </button>
             </>
           )}
-          {!isLoaded  && (
+          {isLoaded  && (
             <div className='flex items-center'>
               
               <ProfileDropdown />
