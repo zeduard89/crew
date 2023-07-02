@@ -65,18 +65,6 @@ export type MainCarrouselProject = Pick<
   'id' | 'mainImage' | 'title' | 'shortDescription'
 >
 
-// export const mainCarrouselProjects: MainCarrouselProject[] = [
-
-//   const { data } = await CrewApi.get<IProject[]>('/projectRoute/fiveMostFunding')
-//   const projects: IProject[] = data?.map((project) => {
-//     const mainImageUrls = project.projectImages?.map((image) => image.url) ?? []
-//     return {
-//       ...project,
-//       mainImage: mainImageUrls[0],
-//     }
-//   }) ?? []
-// ]
-
 export const mainCarrouselProjects: MainCarrouselProject[] = [
   {
     id: '102',

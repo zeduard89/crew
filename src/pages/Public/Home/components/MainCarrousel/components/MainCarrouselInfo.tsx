@@ -14,7 +14,7 @@ export const MainCarrouselInfo: React.FC<IMainCarrouselInfoProps> = ({
       <div className='relative'>
         <h2 className='text-2xl font-semibold'>{project.title}</h2>
         <p className='pb-3 pt-1 text-base'>{project.shortDescription}</p>
-        <Link to='#' className='text-sm font-bold hover:underline'>
+        <Link to={`/projects/${project.id}`} className='text-sm font-bold hover:underline'>
           See Project
         </Link>
       </div>
