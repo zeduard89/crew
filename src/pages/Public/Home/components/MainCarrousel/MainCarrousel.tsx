@@ -1,11 +1,8 @@
 import { Autoplay, Navigation, Pagination, Scrollbar } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { MainCarrouselInfo } from './components'
-import { useEffect, useState } from 'react'
-
+import { mainCarrouselProjects } from '@/data'
 //! ----
-import { CrewApi } from '@/api'
-import { type IProject } from '@/interfaces'
 
 
 
@@ -31,37 +28,10 @@ import 'swiper/css/scrollbar'
 
 
 
- // export const MainCarrousel: React.FC = () => {
-
- export const MainCarrousel: React.FC = (): JSX.Element => {
-  const [projects, setProjects] = useState<IProject[]>([]);
-
-  useEffect(() => {
-    const fetchData = async (): Promise<void> => {
-      try {
-        const { data } = await CrewApi.get<IProject[]>('/projectRoute/fiveMostFunding');
-        const mappedProjects: IProject[] = data?.map((project) => {
-          const mainImageUrls = project.projectImages?.map((image) => image.url) ?? [];
-          return {
-            ...project,
-            mainImage: mainImageUrls[0],
-          };
-        }) ?? [];
-        setProjects(mappedProjects);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData().catch((error) => {
-      console.error('Unhandled error:', error);
-    });
-  }, []);
-
+ export const MainCarrousel: React.FC = () => {
 
   return (
-    <div>
-      {projects.length > 0 ? (
+      
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, Autoplay]}
       slidesPerView={1}
@@ -72,7 +42,7 @@ import 'swiper/css/scrollbar'
       scrollbar={{ draggable: true }}
       autoplay={{ delay: 3000 }}
     >
-      {projects.map((project) => (
+      {mainCarrouselProjects.map((project) => (
         <SwiperSlide key={project.id}>
           <div className='relative h-[500px] w-full'>
             <div className='absolute h-full w-full bg-black bg-opacity-50' />
@@ -86,9 +56,6 @@ import 'swiper/css/scrollbar'
         </SwiperSlide>
       ))}
     </Swiper>
-    ) : (
-      <p>No projects available.</p>
-    )}
-  </div>
+    
   )
 }
