@@ -15,11 +15,11 @@ export const TopCategories: React.FC = () => {
           <p className='text-center text-sm'>
             projects just for you and get great recommendations when .
           </p>
-          <div className='mt-3 box-border flex w-1/2 justify-center text-sm'>
+          {/* <div className='mt-3 box-border flex w-1/2 justify-center text-sm'>
             <button className='mr-0 rounded-sm border bg-white px-3 py-1 uppercase  text-black focus:bg-white focus:outline-none'>
               Learn more
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className='flex h-[125px] w-[100%]  flex-row justify-center'>
