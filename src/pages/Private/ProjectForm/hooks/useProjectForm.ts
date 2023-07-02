@@ -36,16 +36,15 @@ export const useProjectForm = (): IProjectForm => {
       )
       if (data.updateProjectPicture.length !== 0) {
         // OBJETO --> ARRAY
-        console.log(data.updateProjectPicture)
         const selectedFiles = Array.from(data.updateProjectPicture)
 
         // CLASE FORM DATA, le da las propiedades a la constante files
         const files = new FormData()
-
+        console.log(files)
         // Itero el array
         selectedFiles.forEach((file) => {
-          console.log(file)
           files.append('files', file)
+          console.log(files)
         })
         await CrewApi.post('/projectRoute/superImage', {
           files,
