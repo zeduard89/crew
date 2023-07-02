@@ -45,7 +45,7 @@ export const useProjectForm = (): IProjectForm => {
         selectedFiles.forEach((file) => {
           files.append('files', file)
         })
-
+        console.log(files)
         await CrewApi.post('/projectRoute/superImage', {
           files,
         })
