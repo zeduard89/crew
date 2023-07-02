@@ -1,5 +1,5 @@
 import { CrewApi } from '@/api'
-import { images } from '@/data'
+// import { images } from '@/data'
 import { type IProject } from '@/interfaces'
 
 interface IProjectError {
@@ -22,10 +22,25 @@ export const projectsFetcher: IProjectsFetcher = async ({ path, params }) => {
     return []
   }
 
-  const projects = data?.map((project) => ({
-    ...project,
-    mainImage: images[Math.floor(Math.random() * images.length)],
-  }))
+  const projects: IProject[] =
+    data?.map((project) => {
+      // Extraer solo las URLs de las imágenes y asignarlas a la propiedad mainImage
+      const mainImageUrls =
+        project.projectImages?.map((image) => image.url) ?? []
+
+      return {
+        ...project,
+        mainImage: mainImageUrls[0],
+      }
+    }) ?? []
 
   return projects
 }
+
+//   const projects = data?.map((project) => ({
+//     ...project,
+//     mainImage: images[Math.floor(Math.random() * images.length)],
+//   }))
+
+//   return projects
+// }

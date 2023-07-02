@@ -11,6 +11,7 @@ interface IProjectSliderProps {
 }
 
 export const ProjectSlider: React.FC<IProjectSliderProps> = ({ project }) => {
+  const mainImageUrls = project.projectImages?.map((image) => image.url) ?? []
   return (
     <Swiper
       modules={[Navigation, Autoplay]}
@@ -21,7 +22,7 @@ export const ProjectSlider: React.FC<IProjectSliderProps> = ({ project }) => {
       autoplay={{ delay: 3000 }}
       className='w-3/5'
     >
-      {project?.images?.map((image) => (
+      {mainImageUrls.map((image) => (
         <SwiperSlide key={image}>
           <div className='flex h-full items-center justify-center'>
             <img
