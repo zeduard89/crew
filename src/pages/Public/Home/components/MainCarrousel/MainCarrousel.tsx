@@ -1,6 +1,7 @@
 import { Autoplay, Navigation, Pagination, Scrollbar } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { MainCarrouselInfo } from './components'
+import { useEffect, useState } from 'react'
 
 //! ----
 import { CrewApi } from '@/api'
@@ -17,24 +18,47 @@ import 'swiper/css/scrollbar'
 //!  --
 
 
+  
+  // const { data } = await CrewApi.get<IProject[]>('/projectRoute/fiveMostFunding')
+  // const projects: IProject[] = data?.map((project) => {
+  //   const mainImageUrls = project.projectImages?.map((image) => image.url) ?? []
+  //   return {
+  //     ...project,
+  //     mainImage: mainImageUrls[0],
+  //   }
+  // }) ?? []
+ 
 
-  const { data } = await CrewApi.get<IProject[]>('/projectRoute/fiveMostFunding')
 
-  const projects: IProject[] =
-    data?.map((project) => {
-      // Extraer solo las URLs de las imágenes y asignarlas a la propiedad mainImage
-      const mainImageUrls =
-        project.projectImages?.map((image) => image.url) ?? []
 
-      return {
-        ...project,
-        mainImage: mainImageUrls[0],
+ // export const MainCarrousel: React.FC = () => {
+
+ export const MainCarrousel: React.FC = (): JSX.Element => {
+  const [projects, setProjects] = useState<IProject[]>([]);
+
+  useEffect(() => {
+    const fetchData = async (): Promise<void> => {
+      try {
+        const { data } = await CrewApi.get<IProject[]>('/projectRoute/fiveMostFunding');
+        const mappedProjects: IProject[] = data?.map((project) => {
+          const mainImageUrls = project.projectImages?.map((image) => image.url) ?? [];
+          return {
+            ...project,
+            mainImage: mainImageUrls[0],
+          };
+        }) ?? [];
+        setProjects(mappedProjects);
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
-    }) ?? []
+    };
+
+    fetchData().catch((error) => {
+      console.error('Unhandled error:', error);
+    });
+  }, []);
 
 
-
-export const MainCarrousel: React.FC = () => {
   return (
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, Autoplay]}
