@@ -60,6 +60,8 @@ import 'swiper/css/scrollbar'
 
 
   return (
+    <div>
+      {projects.length > 0 ? (
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, Autoplay]}
       slidesPerView={1}
@@ -84,5 +86,9 @@ import 'swiper/css/scrollbar'
         </SwiperSlide>
       ))}
     </Swiper>
+    ) : (
+      <p>No projects available.</p>
+    )}
+  </div>
   )
 }
