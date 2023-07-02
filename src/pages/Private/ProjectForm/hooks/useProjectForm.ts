@@ -9,6 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { type IProjectForm } from '../interface/projectForm'
+import axios from 'axios'
 
 export const useProjectForm = (): IProjectForm => {
   const {
@@ -44,8 +45,10 @@ export const useProjectForm = (): IProjectForm => {
         selectedFiles.forEach((file) => {
           files.append('files', file)
         })
-        console.log(files.getAll('files'))
-        await CrewApi.post('/projectRoute/superImage', files)
+        // Veo por consola el contenido
+        // console.log(files.getAll('files'))
+        // await CrewApi.post('/projectRoute/superImage', files)
+        await axios.post('http://localhost:3001/projectRoute/superImage', files)
       }
       if (projectId.message === undefined) return
       navigate(`${PublicRoutes.projects}/${projectId.message}`)
