@@ -64,7 +64,8 @@ export type MainCarrouselProject = Pick<
   IProject,
   'id' | 'mainImage' | 'title' | 'shortDescription'
 >
-export const mainCarrouselProjects: MainCarrouselProject[] = [
+
+// export const mainCarrouselProjects: MainCarrouselProject[] = [
 
 //   const { data } = await CrewApi.get<IProject[]>('/projectRoute/fiveMostFunding')
 //   const projects: IProject[] = data?.map((project) => {
@@ -76,43 +77,43 @@ export const mainCarrouselProjects: MainCarrouselProject[] = [
 //   }) ?? []
 // ]
 
-// export const mainCarrouselProjects: MainCarrouselProject[] = [
-//   {
-//     id: '102',
-//     mainImage: 'https://picsum.photos/1000/500',
-//     title: 'Project 102',
-//     shortDescription:
-//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-//   },
-//   {
-//     id: '103',
-//     mainImage: 'https://picsum.photos/1050/500',
-//     title: 'Project 103',
-//     shortDescription:
-//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-//   },
-//   {
-//     id: '104',
-//     mainImage: 'https://picsum.photos/1100/500',
-//     title: 'Project 104',
-//     shortDescription:
-//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-//   },
-//   {
-//     id: '105',
-//     mainImage: 'https://picsum.photos/1150/500',
-//     title: 'Project 105',
-//     shortDescription:
-//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-//   },
-//   {
-//     id: '106',
-//     mainImage: 'https://picsum.photos/1200/500',
-//     title: 'Project 106',
-//     shortDescription:
-//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-//   },
-// ]
+export const mainCarrouselProjects: MainCarrouselProject[] = [
+  {
+    id: '102',
+    mainImage: 'https://picsum.photos/1000/500',
+    title: 'Project 102',
+    shortDescription:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+  {
+    id: '103',
+    mainImage: 'https://picsum.photos/1050/500',
+    title: 'Project 103',
+    shortDescription:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+  {
+    id: '104',
+    mainImage: 'https://picsum.photos/1100/500',
+    title: 'Project 104',
+    shortDescription:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+  {
+    id: '105',
+    mainImage: 'https://picsum.photos/1150/500',
+    title: 'Project 105',
+    shortDescription:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+  {
+    id: '106',
+    mainImage: 'https://picsum.photos/1200/500',
+    title: 'Project 106',
+    shortDescription:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+]
 
 export const projectsDetail: IProject[] = [
   {
