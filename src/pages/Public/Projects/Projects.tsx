@@ -125,6 +125,24 @@ export const Projects: React.FC = () => {
           setModalFund={setModalFund}
         />
       )}
+      <div className="mt-8 p-4 border border-gray-300 rounded">
+        <h3 className="text-xl font-bold mb-4">Comments</h3>
+        {project.projectComments?.map((comment) => (
+          <div key={comment.id} className="mb-4">
+            <p className="font-semibold">{comment.name}</p>
+            <p>{comment.description}</p>
+            <div className="flex justify-between items-center mt-2">
+              <span className="text-sm text-gray-500">
+                {comment.date}
+              </span>
+              {/* Puedes agregar botones para dar "me gusta" o "no me gusta" */}
+              {/* Ejemplo: */}
+              {/* <button>{comment.likes} Likes</button>
+              <button>{comment.dislikes} Dislikes</button> */}
+            </div>
+          </div>
+        ))}
+      </div>
     </>
   )
 }

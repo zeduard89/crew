@@ -6,6 +6,7 @@ export interface IProject {
   id: string
   mainImage: string
   projectImages?: IProjectImage[] //! Propiedad para almacenar las imágenes del proyecto
+  projectComments?: IProjectComment[]
   images: string[]
   title: string
   shortDescription: string
@@ -20,8 +21,22 @@ export interface IProject {
   creatorId: string
 }
 
-interface IProjectImage {
+export interface IProjectImage {
   url: string
+  //! otras propiedades de la imagen...
+}
+export interface IProjectComment {
+  id: number
+  name: string
+  description: string
+  likes: string
+  dislikes: string
+  date: string
+  displayComment: true
+  userId: string
+  projectId: string
+  parentId: string
+
   //! otras propiedades de la imagen...
 }
 

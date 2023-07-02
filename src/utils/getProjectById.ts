@@ -8,9 +8,8 @@ export const getProjectById = async (
   const { data } = await CrewApi.get<IProject>(
     `/projectRoute/search/byId?id=${id}`
   )
-
   if ('errorMessage' in data) return
-
+  console.log(data)
   const project = {
     ...data,
     mainImage: images[0],
