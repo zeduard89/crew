@@ -15,6 +15,11 @@ export const CategoryRedirect = {
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+
+  // Extraer solo las URLs de las imágenes y asignarlas a la propiedad mainImage
+  const mainImageUrls =
+  project.projectImages?.map((image) => image.url) ?? []
+
   const navigate = useNavigate()
   return (
     <li className='h-[650px] w-72 cursor-default py-8'>
@@ -27,7 +32,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         >
           <img
             className='h-full w-full rounded-t-2xl object-cover'
-            src={project.mainImage}
+            src={mainImageUrls[0]}
             alt={project.title}
           />
         </div>

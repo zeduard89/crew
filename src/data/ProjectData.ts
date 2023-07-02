@@ -10,6 +10,7 @@ export type ProjectCardType = Pick<
   | 'fundingPercentage'
   | 'fundingDayLeft'
   | 'category'
+  | 'projectImages'
 >
 
 export const ProjectCardsData: ProjectCardType[] = [
