@@ -1,5 +1,4 @@
 import { CrewApi } from '@/api'
-// import { images } from '@/data'
 import { type IProject } from '@/interfaces'
 
 interface IProjectError {
@@ -36,11 +35,3 @@ export const projectsFetcher: IProjectsFetcher = async ({ path, params }) => {
 
   return projects
 }
-
-//   const projects = data?.map((project) => ({
-//     ...project,
-//     mainImage: images[Math.floor(Math.random() * images.length)],
-//   }))
-
-//   return projects
-// }

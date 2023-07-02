@@ -1,13 +1,38 @@
-import { mainCarrouselProjects } from '@/data'
 import { Autoplay, Navigation, Pagination, Scrollbar } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { MainCarrouselInfo } from './components'
+
+//! ----
+import { CrewApi } from '@/api'
+import { type IProject } from '@/interfaces'
+
+
 
 import 'swiper/css'
 import 'swiper/css/autoplay'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
+
+//!  --
+
+
+
+  const { data } = await CrewApi.get<IProject[]>('/projectRoute/fiveMostFunding')
+
+  const projects: IProject[] =
+    data?.map((project) => {
+      // Extraer solo las URLs de las imágenes y asignarlas a la propiedad mainImage
+      const mainImageUrls =
+        project.projectImages?.map((image) => image.url) ?? []
+
+      return {
+        ...project,
+        mainImage: mainImageUrls[0],
+      }
+    }) ?? []
+
+
 
 export const MainCarrousel: React.FC = () => {
   return (
@@ -21,7 +46,7 @@ export const MainCarrousel: React.FC = () => {
       scrollbar={{ draggable: true }}
       autoplay={{ delay: 3000 }}
     >
-      {mainCarrouselProjects.map((project) => (
+      {projects.map((project) => (
         <SwiperSlide key={project.id}>
           <div className='relative h-[500px] w-full'>
             <div className='absolute h-full w-full bg-black bg-opacity-50' />
