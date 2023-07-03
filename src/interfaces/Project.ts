@@ -29,8 +29,8 @@ export interface IProjectComment {
   id: number
   name: string
   description: string
-  likes: string
-  dislikes: string
+  likes: number
+  disLikes: number
   date: string
   displayComment: true
   userId: string

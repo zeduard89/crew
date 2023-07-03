@@ -9,6 +9,7 @@ import {
   ProjectSlider,
 } from './components'
 import { useProjectById } from './hooks'
+import axios from 'axios'
 
 interface UserParams {
   id: string
@@ -21,10 +22,50 @@ export const Projects: React.FC = () => {
   const [modalFund, setModalFund] = useState(false)
   const { userId } = useUserIdStore()
   const { setModalAuth } = useModalAuthStore()
+  const [description, setCommentText] = useState('');
+
 
   if (project === undefined) {
     return <div>Loading...</div>
   }
+
+  const handleLike = async (commentId:number,like:number,disLike:number): Promise<void> => {
+    try {
+      await axios.put(`http://localhost:3001/commentRoute/addCommentlikes`, {commentId,like,disLike});
+      // Refresh project data after updating likes
+      // You may need to implement a function to fetch the updated project data
+    } catch (error) {
+      console.log('Error updating likes:', error);
+    }
+  };
+
+  const handleDislike = async (commentId:number,like:number,disLike:number): Promise<void> => {
+    try {
+      await axios.put(`http://localhost:3001/commentRoute/addCommentlikes`, {commentId,like,disLike});
+      // Refresh project data after updating dislikes
+      // You may need to implement a function to fetch the updated project data
+    } catch (error) {
+      console.log('Error updating dislikes:', error);
+    }
+  };
+
+  const handleSubmitComment = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+    try {
+      // Send the comment to the backend
+      await axios.post('http://localhost:3001/commentRoute/addCommentUserToProject', {
+        projectId: project.id,
+        userId,
+        description,
+      });
+      // Reset the comment text field
+      setCommentText('');
+      // Refresh project data after adding the comment
+      // You may need to implement a function to fetch the updated project data
+    } catch (error) {
+      console.log('Error submitting comment:', error);
+    }
+  };
 
   return (
     <>
@@ -126,6 +167,20 @@ export const Projects: React.FC = () => {
         />
       )}
       <div className="mt-8 p-4 border border-gray-300 rounded">
+      <form onSubmit={handleSubmitComment} className='mt-4'>
+          <textarea
+            value={description}
+            onChange={(e) => { setCommentText(e.target.value); }}
+            placeholder='Add a comment...'
+            className='w-full px-4 py-2 border border-gray-300 rounded'
+          ></textarea>
+          <button
+            type='submit'
+            className='mt-2 px-4 py-2 bg-primary text-white rounded hover:bg-primaryDark'
+          >
+            Submit Comment
+          </button>
+        </form>
         <h3 className="text-xl font-bold mb-4">Comments</h3>
         {project.projectComments?.map((comment) => (
           <div key={comment.id} className="mb-4">
@@ -135,14 +190,17 @@ export const Projects: React.FC = () => {
               <span className="text-sm text-gray-500">
                 {comment.date}
               </span>
-              {/* Puedes agregar botones para dar "me gusta" o "no me gusta" */}
-              {/* Ejemplo: */}
-              {/* <button>{comment.likes} Likes</button>
-              <button>{comment.dislikes} Dislikes</button> */}
+              <button onClick={async () => { await handleLike(comment.id,1,0); }}>
+                Like {comment.likes}
+              </button>
+              <button onClick={async () => { await handleDislike(comment.id,0,1); }}>
+                Dislike {comment.disLikes}
+              </button>
             </div>
           </div>
         ))}
       </div>
+      
     </>
   )
 }
