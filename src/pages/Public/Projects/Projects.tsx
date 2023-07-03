@@ -10,13 +10,65 @@ import {
 } from './components'
 import { useProjectById } from './hooks'
 import axios from 'axios'
+import { useQueryClient, type UseMutationResult } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query'
+const URL:string = import.meta.env.VITE_CREWDB_URL ?? 'http://localhost:3001'
+
+
 
 interface UserParams {
   id: string
 }
 
+ const useAddCommentMutation = (id: string): UseMutationResult<void, unknown, { projectId: string; userId: string; description: string }, unknown> => {
+  const queryClient = useQueryClient();
+
+   return useMutation({ mutationFn: async (commentData: { projectId: string; userId: string; description: string }) => {
+      await axios.post(`${URL}/commentRoute/addCommentUserToProject`, commentData);
+
+    }, onSuccess: () => {
+        // Invalidate the project query to fetch updated data
+       void queryClient.invalidateQueries(['project', id]);
+      }, onError: (error) => {
+        console.log('Error submitting comment:', error);
+      } });
+
+};
+
+const useAddLikeMutation = (id:string):UseMutationResult<void, unknown, { commentId:number,like:number,disLike:number }, unknown> => {
+  const queryClient = useQueryClient();
+
+  return useMutation({ mutationFn: async (commentData: { commentId:number,like:number,disLike:number})=>{
+    await axios.put(`${URL}/commentRoute/addCommentlikes`, commentData);
+  },onSuccess: () => {
+    // Invalidate the project query to fetch updated data
+   void queryClient.invalidateQueries(['project', id]);
+  }, onError: (error) => {
+    console.log('Error submitting comment:', error);
+  } });
+
+}
+
+const useAddDislikeMutation = (id:string):UseMutationResult<void, unknown, { commentId:number,like:number,disLike:number }, unknown> => {
+  const queryClient = useQueryClient();
+
+  return useMutation({ mutationFn: async (commentData: { commentId:number,like:number,disLike:number})=>{
+    await axios.put(`${URL}/commentRoute/addCommentlikes`, commentData);
+  },onSuccess: () => {
+    // Invalidate the project query to fetch updated data
+   void queryClient.invalidateQueries(['project', id]);
+  }, onError: (error) => {
+    console.log('Error submitting comment:', error);
+  } });
+
+}
+
+
 export const Projects: React.FC = () => {
   const { id } = useParams<keyof UserParams>() as UserParams
+  const addCommentMutation = useAddCommentMutation(id);
+  const addLikesMutation = useAddLikeMutation(id);
+  const addDisLikesMutation = useAddDislikeMutation(id);
   const { project } = useProjectById(id)
   const [copyShareBtn, setCopyShareBtn] = useState('Share')
   const [modalFund, setModalFund] = useState(false)
@@ -31,9 +83,7 @@ export const Projects: React.FC = () => {
 
   const handleLike = async (commentId:number,like:number,disLike:number): Promise<void> => {
     try {
-      await axios.put(`http://localhost:3001/commentRoute/addCommentlikes`, {commentId,like,disLike});
-      // Refresh project data after updating likes
-      // You may need to implement a function to fetch the updated project data
+      await addLikesMutation.mutateAsync({commentId,like,disLike})
     } catch (error) {
       console.log('Error updating likes:', error);
     }
@@ -41,31 +91,29 @@ export const Projects: React.FC = () => {
 
   const handleDislike = async (commentId:number,like:number,disLike:number): Promise<void> => {
     try {
-      await axios.put(`http://localhost:3001/commentRoute/addCommentlikes`, {commentId,like,disLike});
-      // Refresh project data after updating dislikes
-      // You may need to implement a function to fetch the updated project data
+       // await axios.put(`${URL}/commentRoute/addCommentlikes`, {commentId,like,disLike});
+      await addDisLikesMutation.mutateAsync({commentId,like,disLike})
     } catch (error) {
       console.log('Error updating dislikes:', error);
     }
   };
 
+
+  
+
   const handleSubmitComment = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
+  
     try {
-      // Send the comment to the backend
-      await axios.post('http://localhost:3001/commentRoute/addCommentUserToProject', {
-        projectId: project.id,
-        userId,
-        description,
-      });
+      await addCommentMutation.mutateAsync({ projectId: project?.id, userId, description });
       // Reset the comment text field
       setCommentText('');
-      // Refresh project data after adding the comment
-      // You may need to implement a function to fetch the updated project data
     } catch (error) {
       console.log('Error submitting comment:', error);
     }
   };
+
+
 
   return (
     <>
