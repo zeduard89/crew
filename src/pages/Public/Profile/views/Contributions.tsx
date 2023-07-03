@@ -69,7 +69,7 @@ export const Contributions: React.FC<ContributionsProps> = ({ userId }) => {
     void fetchContributions();
   }, []);
 
-
+// Comentario
   return (
     <div>
       {contributions.length === 0 ? (
