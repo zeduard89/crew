@@ -230,23 +230,23 @@ export const Projects: React.FC = () => {
           </button>
         </form>
         <h3 className="text-xl font-bold mb-4">Comments</h3>
-        {project.projectComments?.reverse().map((comment) => (
-  <div key={comment.id} className="mb-4">
-    <p className="font-semibold">{comment.name}</p>
-    <p>{comment.description}</p>
-    <div className="flex justify-between items-center mt-2">
-      <span className="text-sm text-gray-500">
-        {comment.date}
-      </span>
-      <button onClick={async () => { await handleLike(comment.id, 1, 0); }}>
-        Like {comment.likes}
-      </button>
-      <button onClick={async () => { await handleDislike(comment.id, 0, 1); }}>
-        Dislike {comment.disLikes}
-      </button>
+        {project.projectComments
+          ?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+          .map((comment) => (
+          <div key={comment.id} className="mb-4">
+          <p className="font-semibold">{comment.name}</p>
+          <p>{comment.description}</p>
+          <div className="flex justify-between items-center mt-2">
+          <span className="text-sm text-gray-500">{comment.date}</span>
+          <button onClick={async () => { await handleLike(comment.id, 1, 0); }}>
+             Like {comment.likes}
+          </button>
+          <button onClick={async () => { await handleDislike(comment.id, 0, 1); }}>
+             Dislike {comment.disLikes}
+          </button>
+      </div>
     </div>
-  </div>
-))}
+  ))}
       </div>
       
     </>
