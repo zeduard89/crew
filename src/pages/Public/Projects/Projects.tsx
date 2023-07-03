@@ -1,7 +1,7 @@
 import { useModalAuthStore, useUserIdStore } from '@/store'
 import { copyURLtoClipBoard, numberToUSD } from '@/utils'
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import {
   FavoriteButton,
   FundModal,
@@ -10,110 +10,160 @@ import {
 } from './components'
 import { useProjectById } from './hooks'
 import axios from 'axios'
-import { useQueryClient, type UseMutationResult } from '@tanstack/react-query';
+import { useQueryClient, type UseMutationResult } from '@tanstack/react-query'
 import { useMutation } from '@tanstack/react-query'
-  const URL ='http://localhost:3001'
- // const URL = "https://backcrew-production.up.railway.app"
-
+const URL = 'http://localhost:3001'
+// const URL = "https://backcrew-production.up.railway.app"
 
 interface UserParams {
   id: string
 }
 
- const useAddCommentMutation = (id: string): UseMutationResult<void, unknown, { projectId: string; userId: string; description: string }, unknown> => {
-  const queryClient = useQueryClient();
+const useAddCommentMutation = (
+  id: string
+): UseMutationResult<
+  void,
+  unknown,
+  { projectId: string; userId: string; description: string },
+  unknown
+> => {
+  const queryClient = useQueryClient()
 
-   return useMutation({ mutationFn: async (commentData: { projectId: string; userId: string; description: string }) => {
-      await axios.post(`${URL}/commentRoute/addCommentUserToProject`, commentData);
-
-    }, onSuccess: () => {
-        // Invalidate the project query to fetch updated data
-       void queryClient.invalidateQueries(['project', id]);
-      }, onError: (error) => {
-        console.log('Error submitting comment:', error);
-      } });
-
-};
-
-const useAddLikeMutation = (id:string):UseMutationResult<void, unknown, { commentId:number,like:number,disLike:number }, unknown> => {
-  const queryClient = useQueryClient();
-
-  return useMutation({ mutationFn: async (commentData: { commentId:number,like:number,disLike:number})=>{
-    await axios.put(`${URL}/commentRoute/addCommentlikes`, commentData);
-  },onSuccess: () => {
-    // Invalidate the project query to fetch updated data
-   void queryClient.invalidateQueries(['project', id]);
-  }, onError: (error) => {
-    console.log('Error submitting comment:', error);
-  } });
-
+  return useMutation({
+    mutationFn: async (commentData: {
+      projectId: string
+      userId: string
+      description: string
+    }) => {
+      await axios.post(
+        `${URL}/commentRoute/addCommentUserToProject`,
+        commentData
+      )
+    },
+    onSuccess: () => {
+      // Invalidate the project query to fetch updated data
+      void queryClient.invalidateQueries(['project', id])
+    },
+    onError: (error) => {
+      console.log('Error submitting comment:', error)
+    },
+  })
 }
 
-const useAddDislikeMutation = (id:string):UseMutationResult<void, unknown, { commentId:number,like:number,disLike:number }, unknown> => {
-  const queryClient = useQueryClient();
+const useAddLikeMutation = (
+  id: string
+): UseMutationResult<
+  void,
+  unknown,
+  { commentId: number; like: number; disLike: number },
+  unknown
+> => {
+  const queryClient = useQueryClient()
 
-  return useMutation({ mutationFn: async (commentData: { commentId:number,like:number,disLike:number})=>{
-    await axios.put(`${URL}/commentRoute/addCommentlikes`, commentData);
-  },onSuccess: () => {
-    // Invalidate the project query to fetch updated data
-   void queryClient.invalidateQueries(['project', id]);
-  }, onError: (error) => {
-    console.log('Error submitting comment:', error);
-  } });
-
+  return useMutation({
+    mutationFn: async (commentData: {
+      commentId: number
+      like: number
+      disLike: number
+    }) => {
+      await axios.put(`${URL}/commentRoute/addCommentlikes`, commentData)
+    },
+    onSuccess: () => {
+      // Invalidate the project query to fetch updated data
+      void queryClient.invalidateQueries(['project', id])
+    },
+    onError: (error) => {
+      console.log('Error submitting comment:', error)
+    },
+  })
 }
 
+const useAddDislikeMutation = (
+  id: string
+): UseMutationResult<
+  void,
+  unknown,
+  { commentId: number; like: number; disLike: number },
+  unknown
+> => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (commentData: {
+      commentId: number
+      like: number
+      disLike: number
+    }) => {
+      await axios.put(`${URL}/commentRoute/addCommentlikes`, commentData)
+    },
+    onSuccess: () => {
+      // Invalidate the project query to fetch updated data
+      void queryClient.invalidateQueries(['project', id])
+    },
+    onError: (error) => {
+      console.log('Error submitting comment:', error)
+    },
+  })
+}
 
 export const Projects: React.FC = () => {
   const { id } = useParams<keyof UserParams>() as UserParams
-  const addCommentMutation = useAddCommentMutation(id);
-  const addLikesMutation = useAddLikeMutation(id);
-  const addDisLikesMutation = useAddDislikeMutation(id);
+  const addCommentMutation = useAddCommentMutation(id)
+  const addLikesMutation = useAddLikeMutation(id)
+  const addDisLikesMutation = useAddDislikeMutation(id)
   const { project } = useProjectById(id)
   const [copyShareBtn, setCopyShareBtn] = useState('Share')
   const [modalFund, setModalFund] = useState(false)
   const { userId } = useUserIdStore()
   const { setModalAuth } = useModalAuthStore()
-  const [description, setCommentText] = useState('');
-
+  const [description, setCommentText] = useState('')
 
   if (project === undefined) {
     return <div>Loading...</div>
   }
 
-  const handleLike = async (commentId:number,like:number,disLike:number): Promise<void> => {
+  const handleLike = async (
+    commentId: number,
+    like: number,
+    disLike: number
+  ): Promise<void> => {
     try {
-      await addLikesMutation.mutateAsync({commentId,like,disLike})
+      await addLikesMutation.mutateAsync({ commentId, like, disLike })
     } catch (error) {
-      console.log('Error updating likes:', error);
+      console.log('Error updating likes:', error)
     }
-  };
+  }
 
-  const handleDislike = async (commentId:number,like:number,disLike:number): Promise<void> => {
+  const handleDislike = async (
+    commentId: number,
+    like: number,
+    disLike: number
+  ): Promise<void> => {
     try {
-       // await axios.put(`${URL}/commentRoute/addCommentlikes`, {commentId,like,disLike});
-      await addDisLikesMutation.mutateAsync({commentId,like,disLike})
+      // await axios.put(`${URL}/commentRoute/addCommentlikes`, {commentId,like,disLike});
+      await addDisLikesMutation.mutateAsync({ commentId, like, disLike })
     } catch (error) {
-      console.log('Error updating dislikes:', error);
+      console.log('Error updating dislikes:', error)
     }
-  };
+  }
 
+  const handleSubmitComment = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    e.preventDefault()
 
-  
-
-  const handleSubmitComment = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
-  
     try {
-      await addCommentMutation.mutateAsync({ projectId: project?.id, userId, description });
+      await addCommentMutation.mutateAsync({
+        projectId: project?.id,
+        userId,
+        description,
+      })
       // Reset the comment text field
-      setCommentText('');
+      setCommentText('')
     } catch (error) {
-      console.log('Error submitting comment:', error);
+      console.log('Error submitting comment:', error)
     }
-  };
-
-
+  }
 
   return (
     <>
@@ -132,9 +182,12 @@ export const Projects: React.FC = () => {
             </h2>
             <p className='text-xl'>{project.description.slice(0, 500)}</p>
             <div className='my-2 flex items-center'>
-              <div className='flex items-center'>
+              <Link
+                to={`/userProfile/${project.creatorId}`}
+                className='flex items-center'
+              >
                 <ProjectAvatar creatorId={project.creatorId} />
-              </div>
+              </Link>
             </div>
 
             <div>
@@ -214,41 +267,52 @@ export const Projects: React.FC = () => {
           setModalFund={setModalFund}
         />
       )}
-      <div className="mt-8 p-4 border border-gray-300 rounded">
-      <form onSubmit={handleSubmitComment} className='mt-4'>
+      <div className='mt-8 rounded border border-gray-300 p-4'>
+        <form onSubmit={handleSubmitComment} className='mt-4'>
           <textarea
             value={description}
-            onChange={(e) => { setCommentText(e.target.value); }}
+            onChange={(e) => {
+              setCommentText(e.target.value)
+            }}
             placeholder='Add a comment...'
-            className='w-full px-4 py-2 border border-gray-300 rounded'
+            className='w-full rounded border border-gray-300 px-4 py-2'
           ></textarea>
           <button
             type='submit'
-            className='mt-2 px-4 py-2 bg-primary text-white rounded hover:bg-primaryDark'
+            className='hover:bg-primaryDark mt-2 rounded bg-primary px-4 py-2 text-white'
           >
             Submit Comment
           </button>
         </form>
-        <h3 className="text-xl font-bold mb-4">Comments</h3>
+        <h3 className='mb-4 text-xl font-bold'>Comments</h3>
         {project.projectComments
-          ?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+          ?.sort(
+            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+          )
           .map((comment) => (
-          <div key={comment.id} className="mb-4">
-          <p className="font-semibold">{comment.name}</p>
-          <p>{comment.description}</p>
-          <div className="flex justify-between items-center mt-2">
-          <span className="text-sm text-gray-500">{comment.date}</span>
-          <button onClick={async () => { await handleLike(comment.id, 1, 0); }}>
-             Like {comment.likes}
-          </button>
-          <button onClick={async () => { await handleDislike(comment.id, 0, 1); }}>
-             Dislike {comment.disLikes}
-          </button>
+            <div key={comment.id} className='mb-4'>
+              <p className='font-semibold'>{comment.name}</p>
+              <p>{comment.description}</p>
+              <div className='mt-2 flex items-center justify-between'>
+                <span className='text-sm text-gray-500'>{comment.date}</span>
+                <button
+                  onClick={async () => {
+                    await handleLike(comment.id, 1, 0)
+                  }}
+                >
+                  Like {comment.likes}
+                </button>
+                <button
+                  onClick={async () => {
+                    await handleDislike(comment.id, 0, 1)
+                  }}
+                >
+                  Dislike {comment.disLikes}
+                </button>
+              </div>
+            </div>
+          ))}
       </div>
-    </div>
-  ))}
-      </div>
-      
     </>
   )
 }
