@@ -76,7 +76,7 @@ export const Profile: React.FC = () => {
         <hr className='my-3 border border-primary' />
         {userMenu === UserMenuOptions.Profile && <About user={user} />}
         {userMenu === UserMenuOptions.Projects && <UserProjectsFav />}
-        {userMenu === UserMenuOptions.Contributions && <Contributions userId={id} />}
+        {userMenu === UserMenuOptions.Contributions && <Contributions  />} 
         {id === userId &&
           userMenu === UserMenuOptions.Settings &&
           user !== undefined && <SettingsForm user={user} />}
