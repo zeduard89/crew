@@ -1,7 +1,7 @@
 import { useModalAuthStore, useUserIdStore } from '@/store'
 import { copyURLtoClipBoard, numberToUSD } from '@/utils'
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import {
   FavoriteButton,
   FundModal,
@@ -231,9 +231,12 @@ export const Projects: React.FC = () => {
             </h2>
             <p className='text-xl'>{project.description.slice(0, 500)}</p>
             <div className='my-2 flex items-center'>
-              <div className='flex items-center'>
+              <Link
+                to={`/userProfile/${project.creatorId}`}
+                className='flex items-center'
+              >
                 <ProjectAvatar creatorId={project.creatorId} />
-              </div>
+              </Link>
             </div>
 
             <div>

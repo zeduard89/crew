@@ -71,11 +71,13 @@ export const Profile: React.FC = () => {
             currentOption={userMenu}
             onClick={handleOnClick}
           />
-          <MenuItem
-            menuOption={UserMenuOptions.Settings}
-            currentOption={userMenu}
-            onClick={handleOnClick}
-          />
+          {id === userId && (
+            <MenuItem
+              menuOption={UserMenuOptions.Settings}
+              currentOption={userMenu}
+              onClick={handleOnClick}
+            />
+          )}
         </div>
         <hr className='my-3 border border-primary' />
         {userMenu === UserMenuOptions.Profile && <About user={user} />}
