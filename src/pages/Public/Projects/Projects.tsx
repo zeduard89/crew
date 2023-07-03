@@ -24,7 +24,7 @@ interface UserParams {
   const queryClient = useQueryClient();
 
    return useMutation({ mutationFn: async (commentData: { projectId: string; userId: string; description: string }) => {
-      await axios.post(`${URL}commentRoute/addCommentUserToProject`, commentData);
+      await axios.post(`${URL}/commentRoute/addCommentUserToProject`, commentData);
 
     }, onSuccess: () => {
         // Invalidate the project query to fetch updated data
@@ -39,7 +39,7 @@ const useAddLikeMutation = (id:string):UseMutationResult<void, unknown, { commen
   const queryClient = useQueryClient();
 
   return useMutation({ mutationFn: async (commentData: { commentId:number,like:number,disLike:number})=>{
-    await axios.put(`${URL}commentRoute/addCommentlikes`, commentData);
+    await axios.put(`${URL}/commentRoute/addCommentlikes`, commentData);
   },onSuccess: () => {
     // Invalidate the project query to fetch updated data
    void queryClient.invalidateQueries(['project', id]);
@@ -53,7 +53,7 @@ const useAddDislikeMutation = (id:string):UseMutationResult<void, unknown, { com
   const queryClient = useQueryClient();
 
   return useMutation({ mutationFn: async (commentData: { commentId:number,like:number,disLike:number})=>{
-    await axios.put(`${URL}commentRoute/addCommentlikes`, commentData);
+    await axios.put(`${URL}/commentRoute/addCommentlikes`, commentData);
   },onSuccess: () => {
     // Invalidate the project query to fetch updated data
    void queryClient.invalidateQueries(['project', id]);
