@@ -231,7 +231,7 @@ export const Projects: React.FC = () => {
         </form>
         <h3 className="text-xl font-bold mb-4">Comments</h3>
         {project.projectComments
-          ?.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+          ?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
           .map((comment) => (
           <div key={comment.id} className="mb-4">
           <p className="font-semibold">{comment.name}</p>
