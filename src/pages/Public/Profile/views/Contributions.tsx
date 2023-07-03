@@ -15,7 +15,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const URL: string = import.meta.env.VITE_CREWDB_URL ?? 'http://localhost:3001';
+const URL: string = import.meta.env.VITE_CREWDB_URL;
 
 interface Contribution {
   id: string;
@@ -58,7 +58,7 @@ export const Contributions: React.FC<ContributionsProps> = ({ userId }) => {
   useEffect(() => {
     const fetchContributions = async ():Promise<void> => {
       try {
-        const response = await axios.get(`${URL}/paymentRoute/info/getAllPaymentsFromOneUser?userId=${userId}`);
+        const response = await axios.get(`${URL}paymentRoute/info/getAllPaymentsFromOneUser?userId=${userId}`);
         const payments = response.data;
         setContributions(payments);
       } catch (error) {
