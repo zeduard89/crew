@@ -7,6 +7,7 @@ export interface IProject {
   mainImage: string
   projectImages?: IProjectImage[] //! Propiedad para almacenar las imágenes del proyecto
   projectComments?: IProjectComment[]
+
   images: string[]
   title: string
   shortDescription: string
@@ -23,11 +24,13 @@ export interface IProject {
 
 export interface IProjectImage {
   url: string
+
   //! otras propiedades de la imagen...
 }
 export interface IProjectComment {
   id: number
   name: string
+  lastName: string
   description: string
   likes: number
   disLikes: number
@@ -36,7 +39,10 @@ export interface IProjectComment {
   userId: string
   projectId: string
   parentId: string
-
+  avatar: string
+  commentUser: {
+    avatar: string
+  }
   //! otras propiedades de la imagen...
 }
 
