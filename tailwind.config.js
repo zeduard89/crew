@@ -7,6 +7,10 @@ export default {
         primary: '#252E56',
         secondary: '#98D1E6',
         secondaryDark: '#497DAE',
+        backgroundDark1: '#30313a',
+        backgroundDark2: '#21222D',
+        backgroundDark3: '#171821',
+        textDashboard: '#a9dfd8'
       },
     },
     screens: {

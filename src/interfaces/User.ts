@@ -10,6 +10,8 @@ export interface IUser {
   aboutMe: string
   avatar: string
   date: string
+  admin: true | false
+  createdAt: string
 }
 
 export interface IUserWithAvatar extends Omit<IUser, 'avatar'> {
