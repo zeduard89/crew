@@ -1,17 +1,3 @@
-
-
-// export const Contributions:React.FC = () => {
-
-//   return (
-//     <div>
-//       <h2 className='mb-20 mt-16 flex w-full justify-center text-3xl font-semibold'>
-//         You have not contribute to any project yet!
-//       </h2>
-//     </div>
-//   )
-// }
-
-
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -70,11 +56,14 @@ export const Contributions: React.FC<ContributionsProps> = ({ userId }) => {
   }, []);
 
 // Comentario
+
+
+
   return (
     <div>
       {contributions.length === 0 ? (
         <h2 className='mb-20 mt-16 flex w-full justify-center text-3xl font-semibold'>
-          You have not contributed to any project yet!
+          You have not contributed to any project yet   !
         </h2>
       ) : (
         <div>
