@@ -1,6 +1,13 @@
 import { Layout } from '@/components'
 import { AuthGuard } from '@/guards/AuthGuard'
-import { Home, Profile, ProjectForm, Projects, Search } from '@/pages'
+import {
+  Home,
+  Profile,
+  ProjectForm,
+  Projects,
+  Search,
+  Dashboard,
+} from '@/pages'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 export const PublicRoutes = {
@@ -12,6 +19,7 @@ export const PublicRoutes = {
 
 export const PrivateRoutes = {
   createProject: '/createProject',
+  dashboard: '/dashboard',
 }
 
 export const RouterProvider: React.FC = () => {
@@ -29,6 +37,7 @@ export const RouterProvider: React.FC = () => {
               element={<ProjectForm />}
             />
           </Route>
+          <Route path={PrivateRoutes.dashboard} element={<Dashboard />} />
         </Route>
       </Routes>
     </BrowserRouter>

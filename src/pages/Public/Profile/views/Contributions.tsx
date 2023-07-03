@@ -1,5 +1,3 @@
-
-
 // export const Contributions:React.FC = () => {
 
 //   return (
@@ -11,65 +9,66 @@
 //   )
 // }
 
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-
-const URL: string = import.meta.env.VITE_CREWDB_URL;
+const URL: string = import.meta.env.VITE_CREWDB_URL
 
 interface Contribution {
-  id: string;
-  currencyId: string;
-  dateApproved: string;
-  dateCreated: string;
-  description: string;
-  email: string;
-  entityType: string;
-  firstName: string;
-  identificationNumber: string;
-  identificationType: string;
-  lastName: string;
-  operationType: string;
-  orderId: string;
-  ordertype: string;
-  payerId: string;
-  paymentMetodId: string;
-  phoneAreaCode: string;
-  phoneExtension: string;
-  phoneNumber: string;
-  projectId: string;
-  status: string;
-  statusDetail: string;
-  taxesAmount: number;
-  transactionAmount: number;
-  transactionAmountRefunded: number;
-  transactionReceived: number;
-  type: string;
-  userId: string;
+  id: string
+  currencyId: string
+  dateApproved: string
+  dateCreated: string
+  description: string
+  email: string
+  entityType: string
+  firstName: string
+  identificationNumber: string
+  identificationType: string
+  lastName: string
+  operationType: string
+  orderId: string
+  ordertype: string
+  payerId: string
+  paymentMetodId: string
+  phoneAreaCode: string
+  phoneExtension: string
+  phoneNumber: string
+  projectId: string
+  status: string
+  statusDetail: string
+  taxesAmount: number
+  transactionAmount: number
+  transactionAmountRefunded: number
+  transactionReceived: number
+  type: string
+  userId: string
 }
 
 interface ContributionsProps {
-  userId: string;
+  userId: string
 }
 
 export const Contributions: React.FC<ContributionsProps> = ({ userId }) => {
-  const [contributions, setContributions] = useState<Contribution[]>([]);
+  const [contributions, setContributions] = useState<Contribution[]>([])
 
   useEffect(() => {
-    const fetchContributions = async ():Promise<void> => {
+    const fetchContributions = async (): Promise<void> => {
       try {
-        const response = await axios.get(`${URL}/paymentRoute/info/getAllPaymentsFromOneUser?userId=${userId}`);
-        const payments = response.data;
-        setContributions(payments);
+        const response = await axios.get(
+          `${URL}paymentRoute/info/getAllPaymentsFromOneUser?userId=${userId}`
+        )
+        const payments = response.data
+        setContributions(payments)
       } catch (error) {
-        console.error('Error fetching contributions:', error);
+        console.error('Error fetching contributions:', error)
       }
-    };
+    }
 
-    void fetchContributions();
-  }, []);
+    void fetchContributions()
+  }, [])
 
-// Comentario
+  // Comentario
   return (
     <div>
       {contributions.length === 0 ? (
@@ -80,8 +79,10 @@ export const Contributions: React.FC<ContributionsProps> = ({ userId }) => {
         <div>
           <h2 className='mb-4 text-2xl font-semibold'>Contributions:</h2>
           {contributions.map((contribution) => (
-            <div key={contribution.id} className='border p-4 mb-4'>
-              <h3 className='text-xl font-semibold'>{contribution.description}</h3>
+            <div key={contribution.id} className='mb-4 border p-4'>
+              <h3 className='text-xl font-semibold'>
+                {contribution.description}
+              </h3>
               <p>Currency: {contribution.currencyId}</p>
               <p>Date Approved: {contribution.dateApproved}</p>
               <p>Date Created: {contribution.dateCreated}</p>
@@ -104,7 +105,10 @@ export const Contributions: React.FC<ContributionsProps> = ({ userId }) => {
               <p>Status Detail: {contribution.statusDetail}</p>
               <p>Taxes Amount: {contribution.taxesAmount}</p>
               <p>Transaction Amount: {contribution.transactionAmount}</p>
-              <p>Transaction Amount Refunded: {contribution.transactionAmountRefunded}</p>
+              <p>
+                Transaction Amount Refunded:{' '}
+                {contribution.transactionAmountRefunded}
+              </p>
               <p>Transaction Received: {contribution.transactionReceived}</p>
               <p>Type: {contribution.type}</p>
               <p>User ID: {contribution.userId}</p>
@@ -114,5 +118,5 @@ export const Contributions: React.FC<ContributionsProps> = ({ userId }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
