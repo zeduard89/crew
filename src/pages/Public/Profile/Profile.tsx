@@ -48,7 +48,11 @@ export const Profile: React.FC = () => {
             </div>
           </div>
           <div>
-            <img src={user?.avatar} alt='Avatar image' className='ml-10 w-32' />
+            <img
+              src={user?.avatar}
+              alt='Avatar image'
+              className='ml-10 w-24 rounded-full'
+            />
           </div>
         </div>
         <div className='mt-5 flex items-start justify-start'>
@@ -76,7 +80,9 @@ export const Profile: React.FC = () => {
         <hr className='my-3 border border-primary' />
         {userMenu === UserMenuOptions.Profile && <About user={user} />}
         {userMenu === UserMenuOptions.Projects && <UserProjectsFav />}
-        {userMenu === UserMenuOptions.Contributions && <Contributions userId={id} />}
+        {userMenu === UserMenuOptions.Contributions && (
+          <Contributions userId={id} />
+        )}
         {id === userId &&
           userMenu === UserMenuOptions.Settings &&
           user !== undefined && <SettingsForm user={user} />}

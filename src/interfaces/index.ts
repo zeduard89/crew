@@ -1,6 +1,7 @@
 export * from './AuthModalProps';
 export * from './Comment';
 export * from './DashboarMainInfo';
+export * from './Payments';
 export * from './Project';
 export * from './User';
 export * from './index';

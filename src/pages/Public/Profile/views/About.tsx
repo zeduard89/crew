@@ -5,18 +5,11 @@ interface AboutProps {
 }
 export const About: React.FC<AboutProps> = (props) => {
   return (
-    <div className='flex h-auto w-full border border-black'>
-      <div className='w-8/12'>
-        {/* <img
-          src={props.avatar}
-          alt='Avatar image'
-          className='min-h-[110px] w-auto min-w-[175px] '
-        /> */}
-      </div>
-      <div className='mt-10 w-4/12 text-center text-4xl'>
+    <div className='mb-10 flex h-auto w-full flex-col'>
+      <div className='mb-5 mt-10 text-start text-4xl font-extrabold text-primary'>
         <p>About Me</p>
-        <p className='mt-5 text-lg'>{props.user?.aboutMe}</p>
       </div>
+      <p className='text-lg'>{props.user?.aboutMe}</p>
     </div>
   )
 }
