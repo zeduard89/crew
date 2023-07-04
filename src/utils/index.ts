@@ -2,6 +2,7 @@ export * from './allUsersFetcher';
 export * from './copyURLtoClipBoard';
 export * from './createOrder';
 export * from './dashboardMainInfoFetcher';
+export * from './deleteUserFetcher';
 export * from './formatDate';
 export * from './getFavoriteProjects';
 export * from './getProjectById';
