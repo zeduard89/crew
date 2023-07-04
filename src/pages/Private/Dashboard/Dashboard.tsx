@@ -22,10 +22,10 @@ export const Dashboard: React.FC = () => {
   }
 
   return (
-    <div id='Main container' className='flex h-[1000px] bg-backgroundDark2 p-5'>
+    <div id='Main container' className='flex h-[1045px] bg-backgroundDark2 p-5'>
       <div
         id='Sections'
-        className='h-[960px] w-60 rounded-l-xl bg-backgroundDark3 p-5 font-semibold text-secondary'
+        className='h-[1005px] w-60 rounded-l-xl bg-backgroundDark3 p-5 font-semibold text-secondary'
       >
         <h2 className='mb-4 text-xl'>Sections</h2>
         <ul>
@@ -53,11 +53,11 @@ export const Dashboard: React.FC = () => {
       </div>
       <div
         id='vertical line'
-        className='h-[960px] border border-secondary'
+        className='h-[1005px] border border-secondary'
       ></div>
       <div
         id='section container'
-        className='h-[960px] w-full rounded-r-xl bg-backgroundDark3 p-5'
+        className='h-[1005px] w-full rounded-r-xl bg-backgroundDark3 p-5'
       >
         {dashboardMenu === DashboardMenuOptions.Resume && <ResumeDashboard />}
         {dashboardMenu === DashboardMenuOptions.Contributions && (

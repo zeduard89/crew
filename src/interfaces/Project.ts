@@ -19,6 +19,8 @@ export interface IProject {
   updates?: IUpdate[]
   category: Category
   creatorId: string
+  displayProject: boolean
+  createdAt: string
 }
 
 export interface IProjectImage {

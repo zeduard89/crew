@@ -2,14 +2,22 @@ import { formatDate, deleteUserFetcher } from '@/utils'
 import { type IUser } from '@/interfaces'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash'
+import { useQueryClient } from '@tanstack/react-query'
 
 interface TableProps {
-  responseData: IUser[] | undefined
+  responseData: IUser[]
 }
 
 export const UserTable: React.FC<TableProps> = ({ responseData }) => {
+  const queryClient = useQueryClient()
+
   const deleteUser = async (user: IUser): Promise<void> => {
     await deleteUserFetcher(user)
+    const updatedData = responseData.map((u) =>
+      u.id === user.id ? { ...u, verified: !u.verified } : u
+    )
+    queryClient.setQueryData(['allUsers'], updatedData)
+    await queryClient.invalidateQueries(['allUsers'])
   }
 
   return (
@@ -32,7 +40,7 @@ export const UserTable: React.FC<TableProps> = ({ responseData }) => {
             <td className='px-6 py-4'>{user.lastName}</td>
             <td className='px-6 py-4'>{user.email}</td>
             <td className='px-6 py-4'>{user.country}</td>
-            <td className='px-6 py-4'>{formatDate(user.createdAt)}</td>
+            <td className='px-6 py-4 text-sm'>{formatDate(user.createdAt)}</td>
             <td className='px-6 py-4'>
               {user.admin !== null
                 ? user?.admin
@@ -42,7 +50,7 @@ export const UserTable: React.FC<TableProps> = ({ responseData }) => {
             </td>
             <td className='flex flex-row px-6 py-4'>
               {user?.verified ? (
-                <p className='mr-2.5   text-green-500'>Active</p>
+                <p className='mr-2.5 text-green-500'>Active</p>
               ) : (
                 <p className='text-red-500'>Disable</p>
               )}
