@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { LineChart, UserTable } from '../components'
 import { useDashboardMainInfo, useAllUsers } from '../hooks'
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
 
 export const UsersDashboard: React.FC = () => {
-  // Variables definition for LineChart use
   const { mainInfo } = useDashboardMainInfo()
   const january =
     mainInfo?.chartRegisteredUsersPerMonth[0].totalRegisteredUsers ?? 0
@@ -23,7 +25,22 @@ export const UsersDashboard: React.FC = () => {
   const title = 'New Users per Month [Un]'
 
   const { allUsers } = useAllUsers()
-  const usersInTable = allUsers?.slice(0, 5)
+  const [currentPage, setCurrentPage] = useState(1)
+  const usersPerPage = 5
+
+  const indexOfLastUser = currentPage * usersPerPage
+  const indexOfFirstUser = indexOfLastUser - usersPerPage
+  const usersInTable = allUsers?.slice(indexOfFirstUser, indexOfLastUser)
+
+  const totalPages = Math.ceil((allUsers?.length ?? 0) / usersPerPage)
+
+  const goToPreviousPage = (): void => {
+    setCurrentPage((prevPage) => prevPage - 1)
+  }
+
+  const goToNextPage = (): void => {
+    setCurrentPage((prevPage) => prevPage + 1)
+  }
 
   return (
     <div className='ml-10 flex h-fit flex-col'>
@@ -37,13 +54,33 @@ export const UsersDashboard: React.FC = () => {
         fontSize={20}
         showLabels={true}
       />
-      {usersInTable !== null ? (
-        usersInTable != null ? (
-          <div className='mt-5 rounded-lg bg-backgroundDark1 p-5'>
-            <UserTable responseData={usersInTable} />
+      {allUsers !== null &&
+        allUsers !== undefined &&
+        allUsers?.length > usersPerPage && (
+          <div className=' mr-4 flex justify-end'>
+            <button
+              className='mr-6 w-[30px] text-xl text-white'
+              onClick={goToPreviousPage}
+              disabled={currentPage === 1}
+            >
+              <ArrowCircleLeftIcon style={{ fontSize: 50, color: '#FFFFFF' }} />
+            </button>
+            <button
+              className='text-white'
+              onClick={goToNextPage}
+              disabled={currentPage === totalPages}
+            >
+              <ArrowCircleRightIcon
+                style={{ fontSize: 50, color: '#FFFFFF' }}
+              />
+            </button>
           </div>
-        ) : null
-      ) : null}
+        )}
+      {usersInTable !== null && (
+        <div className='mt-5 rounded-lg bg-backgroundDark1 p-5'>
+          <UserTable responseData={usersInTable} />
+        </div>
+      )}
     </div>
   )
 }
