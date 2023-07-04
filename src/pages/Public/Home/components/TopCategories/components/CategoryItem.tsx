@@ -14,9 +14,11 @@ enum Categories {
 }
 
 const SearchLinks = {
-  Tech: "/search?category=Tech+%26+Innovation&sort=Trending&q=&s=12&p=0&country=all",
-  Creative: "/search?category=Creative+Works&sort=Trending&q=&s=12&p=0&country=all",
-  Community: "/search?category=Community+Projects&sort=Trending&q=&s=12&p=0&country=all",
+  Tech: '/search?category=Tech+%26+Innovation&sort=Trending&q=&s=12&p=0&country=all',
+  Creative:
+    '/search?category=Creative+Works&sort=Trending&q=&s=12&p=0&country=all',
+  Community:
+    '/search?category=Community+Projects&sort=Trending&q=&s=12&p=0&country=all',
   More: `/search`,
 }
 

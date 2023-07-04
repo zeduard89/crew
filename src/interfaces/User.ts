@@ -12,6 +12,7 @@ export interface IUser {
   date: string
   admin: true | false
   createdAt: string
+  verified: boolean
 }
 
 export interface IUserWithAvatar extends Omit<IUser, 'avatar'> {
