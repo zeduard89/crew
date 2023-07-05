@@ -15,7 +15,7 @@ import { useQueryClient, type UseMutationResult } from '@tanstack/react-query'
 import { useMutation } from '@tanstack/react-query'
 import { useUser } from '@/hooks/useUser'
 // const URL:string = import.meta.env.VITE_CREWDB_URL ?? 'http://localhost:3001'
-const URL = 'https://crewdb.onrender.com/'
+const URL = 'https://crewdb.onrender.com'
 
 interface UserParams {
   id: string
