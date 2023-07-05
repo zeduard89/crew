@@ -3,10 +3,9 @@ import { type IPayments } from '@/interfaces'
 
 interface TableProps {
   responseData: IPayments[]
-  isUser: boolean
 }
 
-export const Table: React.FC<TableProps> = ({ responseData, isUser }) => {
+export const Table: React.FC<TableProps> = ({ responseData }) => {
   return (
     <table className='min-w-full divide-y divide-gray-200'>
       <thead>
@@ -23,11 +22,7 @@ export const Table: React.FC<TableProps> = ({ responseData, isUser }) => {
           <tr key={payment.id}>
             <td className='px-6 py-4'>{payment.description}</td>
             <td className='px-6 py-4'>{payment.firstName}</td>
-            <td className='px-6 py-4'>
-              {isUser
-                ? '$ ' + payment.transactionAmount.toLocaleString('en-US')
-                : '$ *****'}
-            </td>
+            <td className='px-6 py-4'>{payment.transactionAmount}</td>
             <td className='px-6 py-4'>{formatDate(payment.dateApproved)}</td>
             <td className='px-6 py-4'>{payment.ordertype}</td>
           </tr>

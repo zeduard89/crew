@@ -5,9 +5,8 @@ type Category = 'Tech & Innovation' | 'Creative Works' | 'Community Projects'
 export interface IProject {
   id: string
   mainImage: string
-  projectImages?: IProjectImage[] //! Propiedad para almacenar las imágenes del proyecto
+  projectImages?: IProjectImage[] 
   projectComments?: IProjectComment[]
-
   images: string[]
   title: string
   shortDescription: string
@@ -20,17 +19,17 @@ export interface IProject {
   updates?: IUpdate[]
   category: Category
   creatorId: string
+  displayProject: boolean
+  createdAt: string
 }
 
 export interface IProjectImage {
   url: string
-
   //! otras propiedades de la imagen...
 }
 export interface IProjectComment {
   id: number
   name: string
-  lastName: string
   description: string
   likes: number
   disLikes: number
@@ -39,10 +38,7 @@ export interface IProjectComment {
   userId: string
   projectId: string
   parentId: string
-  avatar: string
-  commentUser: {
-    avatar: string
-  }
+
   //! otras propiedades de la imagen...
 }
 

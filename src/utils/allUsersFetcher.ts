@@ -19,6 +19,5 @@ export const allUsersFetcher: IAllUsersFetcher = async ({ path }) => {
   }
 
   const mainInfo = data
-
   return mainInfo
 }

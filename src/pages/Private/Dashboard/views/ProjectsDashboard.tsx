@@ -1,5 +1,9 @@
-import { LineChart } from '../components'
-import { useDashboardMainInfo } from '../hooks/useDashboardMainInfo'
+import { LineChart, ProjectTable } from '../components'
+import { useDashboardMainInfo, useAllProjects } from '../hooks'
+import { useState } from 'react'
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
+
 // import { type IDashboardMainInfo } from '@/interfaces'
 
 // type IMonthData = Record<
@@ -134,20 +138,94 @@ export const ProjectsDashboard: React.FC = () => {
   const title = 'Projects per month [Un]'
   const allData = [dataCom, dataCrea, dataTech]
 
+  let { allProjects } = useAllProjects()
+  allProjects = allProjects?.sort((a, b) => {
+    if (a.title < b.title) {
+      return -1
+    }
+    if (a.title > b.title) {
+      return 1
+    }
+
+    return 0
+  })
+  const [currentPage, setCurrentPage] = useState(1)
+  const projectsPerPage = 5
+
+  const indexOfLastUser = currentPage * projectsPerPage
+  const indexOfFirstUser = indexOfLastUser - projectsPerPage
+  const projectsInTable = allProjects?.slice(indexOfFirstUser, indexOfLastUser)
+  const totalPages = Math.ceil((allProjects?.length ?? 0) / projectsPerPage)
+
+  const goToPreviousPage = (): void => {
+    setCurrentPage((prevPage) => prevPage - 1)
+  }
+
+  const goToNextPage = (): void => {
+    setCurrentPage((prevPage) => prevPage + 1)
+  }
+
+  //
+
   return (
-    <div className='ml-10 flex flex-col'>
+    <div className='ml-10 flex h-fit flex-col '>
       <h2 className='mb-8 ml-48 items-center justify-center pl-20 pt-10 text-3xl text-secondary'>
         Projects Dashboard
       </h2>
-      <div className='w-[500px]'>
-        <LineChart
-          title={title}
-          data={allData}
-          width={'w-[800px]'}
-          fontSize={20}
-          showLabels={true}
-        />
-      </div>
+      <LineChart
+        title={title}
+        data={allData}
+        width={'w-[800px]'}
+        fontSize={20}
+        showLabels={true}
+      />
+      {projectsInTable !== null && (
+        <div className='mt-5 flex h-[440px] flex-col justify-between rounded-lg bg-backgroundDark1 p-5'>
+          <ProjectTable responseData={projectsInTable ?? []} />
+          <div className='mb-2 h-[35px]'>
+            {allProjects !== null &&
+              allProjects !== undefined &&
+              allProjects?.length > projectsPerPage && (
+                <div className='flex justify-center'>
+                  <button
+                    className={`mr-10 w-[30px] text-xl ${
+                      currentPage === 1 ? 'text-backgroundDark1' : 'text-white'
+                    } `}
+                    onClick={goToPreviousPage}
+                    disabled={currentPage === 1}
+                  >
+                    <ArrowCircleLeftIcon
+                      className={`${
+                        currentPage === 1
+                          ? 'hover:text-backgroundDark1'
+                          : 'hover:text-gray-300'
+                      }`}
+                      style={{ fontSize: 50 }}
+                    />
+                  </button>
+                  <button
+                    className={`mr-10 w-[30px] text-xl ${
+                      currentPage === totalPages
+                        ? 'text-backgroundDark1'
+                        : 'text-white'
+                    } `}
+                    onClick={goToNextPage}
+                    disabled={currentPage === totalPages}
+                  >
+                    <ArrowCircleRightIcon
+                      className={`${
+                        currentPage === totalPages
+                          ? 'hover:text-backgroundDark1'
+                          : 'hover:text-gray-300'
+                      }`}
+                      style={{ fontSize: 50 }}
+                    />
+                  </button>
+                </div>
+              )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -19,6 +19,8 @@ export const ProfileDropdown: React.FC = () => {
     return <LoadingIcon />
   }
 
+  const adminId = '420fdf38-78f9-4be4-99b7-b9ab93afee85'
+
   return (
     <>
       <div className='relative mr-2 h-10 w-10'>
@@ -62,18 +64,18 @@ export const ProfileDropdown: React.FC = () => {
                     Profile
                   </button>
                 </li>
-                {/* <li className='mb-2'>
-                  <button
-                    className='text-white duration-300 ease-in-out hover:scale-95 hover:text-secondary'
-                    onClick={() => {
-                      navigate(
-                        '/search?category=Tech+%26+Innovation&sort=Trending&q=&s=20&p=0'
-                      )
-                    }}
-                  >
-                    Settings
-                  </button>
-                </li> */}
+                {userId === adminId && (
+                  <li className='mb-2'>
+                    <button
+                      className='text-white duration-300 ease-in-out hover:scale-95 hover:text-secondary'
+                      onClick={() => {
+                        navigate('/dashboard')
+                      }}
+                    >
+                      Dashboard
+                    </button>
+                  </li>
+                )}
                 <li className='mb-2'>
                   <button
                     className='text-white duration-300 ease-in-out hover:scale-95 hover:text-secondary'
