@@ -10,7 +10,6 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { type IProjectForm } from '../interface/projectForm'
 import axios from 'axios'
-const RAILWAY: string = import.meta.env.RAILWAY
 
 export const useProjectForm = (): IProjectForm => {
   const {
@@ -49,7 +48,10 @@ export const useProjectForm = (): IProjectForm => {
         // Veo por consola el contenido
         // console.log(files.getAll('files'))
         // await CrewApi.post('/projectRoute/superImage', files)
-        await axios.post(`${RAILWAY}/projectRoute/superImage`, files)
+        await axios.post(
+          `https://crewdb.onrender.com/projectRoute/superImage`,
+          files
+        )
       }
       if (projectId.message === undefined) return
       navigate(`${PublicRoutes.projects}/${projectId.message}`)
