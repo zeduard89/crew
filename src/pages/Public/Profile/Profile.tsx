@@ -30,6 +30,8 @@ export const Profile: React.FC = () => {
     setUserMenu(option)
   }
 
+  const isUser: boolean = id === userId
+
   return (
     <div className='flex justify-center'>
       <div className='flex w-3/4 flex-col'>
@@ -83,7 +85,7 @@ export const Profile: React.FC = () => {
         {userMenu === UserMenuOptions.Profile && <About user={user} />}
         {userMenu === UserMenuOptions.Projects && <UserProjectsFav />}
         {userMenu === UserMenuOptions.Contributions && (
-          <Contributions userId={id} />
+          <Contributions userId={id} isUser={isUser} />
         )}
         {id === userId &&
           userMenu === UserMenuOptions.Settings &&
