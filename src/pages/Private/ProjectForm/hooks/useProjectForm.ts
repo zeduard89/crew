@@ -10,7 +10,6 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { type IProjectForm } from '../interface/projectForm'
 import axios from 'axios'
-const RAILWAY: string = import.meta.env.RAILWAY
 
 export const useProjectForm = (): IProjectForm => {
   const {
