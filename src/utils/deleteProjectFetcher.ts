@@ -2,21 +2,17 @@ import { CrewApi } from '@/api'
 import { type IProject } from '@/interfaces'
 
 
-interface IProjectDeleteError {
-    'User not found': string
-}    
-interface ILogicProjectDelete {
-    message: string
-}
+type IProjectDeleteError = string    
+type ILogicProjectDelete = string
+
 type IDeleteProjectsFetcher = (props: IProject) => Promise<ILogicProjectDelete | undefined>
 
 export const deleteProjectFetcher: IDeleteProjectsFetcher = async ({ id }) => {
-  const { data } = await CrewApi.put<ILogicProjectDelete | IProjectDeleteError>(`/userRoute/logicalDelete?&userId=${id}`)
+  const { data } = await CrewApi.delete<ILogicProjectDelete | IProjectDeleteError>(`/projectRoute/deleteProject?projectId=${id}`)
+  console.log(data);
   
-  if ('User not found' in data) {
-    return {
-        message: "User not found"
-      }
+  if (data === 'Project Was Deleted Successfully') {
+    return "Project not found"
   }
   const message = data
   return message

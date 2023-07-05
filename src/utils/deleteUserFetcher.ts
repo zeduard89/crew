@@ -12,6 +12,7 @@ type IDeleteUserFetcher = (props: IUser) => Promise<ILogicUserDelete | undefined
 
 export const deleteUserFetcher: IDeleteUserFetcher = async ({ email, id }) => {
   const { data } = await CrewApi.put<ILogicUserDelete | IUsersDeleteError>(`/userRoute/logicalDelete?userEmail=${email}&userId=${id}`)
+  console.log(data);
   
   if ('User not found' in data) {
     return {

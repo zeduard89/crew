@@ -15,7 +15,7 @@ export const ProjectTable: React.FC<TableProps> = ({ responseData }) => {
     await deleteProjectFetcher(project)
     const updatedData = responseData.map((proj) =>
       proj.id === project.id
-        ? { ...proj, verified: !proj.displayProject }
+        ? { ...proj, displayProject: !proj.displayProject }
         : proj
     )
     queryClient.setQueryData(['allProjects'], updatedData)

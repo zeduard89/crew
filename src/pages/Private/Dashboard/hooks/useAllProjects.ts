@@ -13,7 +13,7 @@ export const useAllProjects = (): IUseAllProjects => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['allProjects'],
     queryFn: async () =>
-      await allProjectsFetcher({ path: '/projectRoute/allProjects' }),
+      await allProjectsFetcher({ path: 'adminRoute/searchProjects/?category=all&sort=Trending&p=0&s=20&country=all&q' }),
   })
 
   return { allProjects: data, isLoading, error }

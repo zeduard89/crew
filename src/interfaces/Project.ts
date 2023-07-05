@@ -5,7 +5,7 @@ type Category = 'Tech & Innovation' | 'Creative Works' | 'Community Projects'
 export interface IProject {
   id: string
   mainImage: string
-  projectImages?: IProjectImage[] //! Propiedad para almacenar las imágenes del proyecto
+  projectImages?: IProjectImage[] 
   projectComments?: IProjectComment[]
   images: string[]
   title: string
