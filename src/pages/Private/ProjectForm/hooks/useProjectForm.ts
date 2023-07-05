@@ -49,7 +49,10 @@ export const useProjectForm = (): IProjectForm => {
         // Veo por consola el contenido
         // console.log(files.getAll('files'))
         // await CrewApi.post('/projectRoute/superImage', files)
-        await axios.post(`${RAILWAY}/projectRoute/superImage`, files)
+        await axios.post(
+          `https://crewdb.onrender.com/projectRoute/superImage`,
+          files
+        )
       }
       if (projectId.message === undefined) return
       navigate(`${PublicRoutes.projects}/${projectId.message}`)
