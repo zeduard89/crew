@@ -9,7 +9,7 @@ export const Login: React.FC<LoginProps> = ({ setModalAuth }) => {
     useLoginForm()
 
   return (
-    <div className='mt-48 w-full max-w-sm rounded-lg bg-white p-6 shadow-lg'>
+    <div className='mt-48 w-full max-w-sm rounded-lg bg-white px-10 py-6 shadow-lg'>
       <div className='flex justify-end'>
         <button
           className='right-0 top-0 text-xl duration-300 hover:text-red-700'

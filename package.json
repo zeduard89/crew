@@ -26,6 +26,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.44.3",
     "react-router-dom": "^6.11.2",
+    "sweetalert2": "^11.7.12",
     "swiper": "^9.4.1",
     "zod": "^3.21.4",
     "zustand": "^4.3.8"

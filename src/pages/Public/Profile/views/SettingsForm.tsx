@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { SettingsFormInput } from '../components'
+import { showAlert } from '@/utils'
 
 interface SettingsProps {
   user: IUser
@@ -61,7 +62,15 @@ export const SettingsForm: React.FC<SettingsProps> = ({ user }) => {
             },
           }
         )
+        await showAlert({
+          title: 'Personal information updated!',
+          text: 'This window will close...',
+          icon: 'success',
+          confirmButtonText: 'Cool',
+        })
       }
+
+
 
       void queryClient.invalidateQueries(['user', user.id])
     } catch (error) {
@@ -74,7 +83,7 @@ export const SettingsForm: React.FC<SettingsProps> = ({ user }) => {
   }
 
   return (
-    <div className='relative h-auto w-full'>
+    <div className='relative h-[940px] w-full'>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='mb-4 w-[555px] rounded border border-gray-300 bg-gray-100 p-4'

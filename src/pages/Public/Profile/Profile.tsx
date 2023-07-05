@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { About, Contributions, SettingsForm, UserProjectsFav } from './views'
 import { MenuItem } from './components'
+import { showAlert } from '@/utils'
 
 enum UserMenuOptions {
   Profile = 'Profile',
@@ -26,8 +27,15 @@ export const Profile: React.FC = () => {
     UserMenuOptions.Profile
   )
 
-  const handleOnClick = (option: UserMenuOptions): void => {
+  const handleOnClick = async (option: UserMenuOptions): Promise<void> => {
     setUserMenu(option)
+
+    await showAlert({
+      title: 'Project was successfully created!',
+      text: 'This window will close...',
+      icon: 'success',
+      confirmButtonText: 'Lets Go!',
+    })
   }
 
   return (

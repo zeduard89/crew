@@ -31,7 +31,7 @@ export const Contributions: React.FC<ContributionsProps> = ({ userId }) => {
   return (
     <div>
       {responseData !== null ? (
-        <div className='flex flex-col'>
+        <div className='flex flex-col h-[400px]'>
           <Table responseData={responseData} />
         </div>
       ) : (

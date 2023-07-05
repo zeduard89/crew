@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -53,6 +53,9 @@ dependencies:
   react-router-dom:
     specifier: ^6.11.2
     version: 6.11.2(react-dom@18.2.0)(react@18.2.0)
+  sweetalert2:
+    specifier: ^11.7.12
+    version: 11.7.12
   swiper:
     specifier: ^9.4.1
     version: 9.4.1
@@ -3410,6 +3413,10 @@ packages:
   /supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+
+  /sweetalert2@11.7.12:
+    resolution: {integrity: sha512-TQJy8mQymJLzqWPQOMQErd81Zd/rSYr0UL4pEc7bqEihtjS+zt7LWJXLhfPp93e+Hf3Z2FHMB6QGNskAMCsdTg==}
+    dev: false
 
   /swiper@9.4.1:
     resolution: {integrity: sha512-1nT2T8EzUpZ0FagEqaN/YAhRj33F2x/lN6cyB0/xoYJDMf8KwTFT3hMOeoB8Tg4o3+P/CKqskP+WX0Df046fqA==}
