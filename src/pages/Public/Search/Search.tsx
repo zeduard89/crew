@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { CategoriesContainer } from './components'
 import { useSearch } from './hooks'
 import { type ShowState } from './interface'
+import { type IProject } from '../../../interfaces/Project'
 import {
   URLParams,
   getCategoryQuery,
@@ -12,6 +13,8 @@ import {
   getSortQuery,
 } from './utils'
 import { handleSortSelect } from './utils/filtersHandler'
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
 
 export const Search: React.FC = () => {
   const [showState, setShowState] = useState<ShowState>({
@@ -24,6 +27,43 @@ export const Search: React.FC = () => {
 
   const { projects } = useSearch({ params })
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const projectPerPage = 6
+  const totalPages = Math.ceil((projects?.length ?? 0) / projectPerPage)
+
+  const [projectShown, setProjectShown] = useState<IProject[]>([])
+
+  console.log(projectShown)
+  console.log(currentPage)
+
+  const goToPreviousPage = (): void => {
+    setCurrentPage(currentPage !== 1 ? currentPage - 1 : currentPage)
+    setProjectShown(
+      projects?.slice(
+        (currentPage - 1) * projectPerPage,
+        currentPage * projectPerPage
+      ) ?? []
+    )
+  }
+
+  const goToNextPage = (): void => {
+    setCurrentPage(currentPage !== totalPages ? currentPage + 1 : currentPage)
+    setProjectShown(
+      projects?.slice(
+        (currentPage - 1) * projectPerPage,
+        currentPage * projectPerPage
+      ) ?? []
+    )
+  }
+
+  useEffect(() => {
+    if (projects != null) {
+      setCurrentPage(1)
+      setProjectShown(projects.slice(0, projectPerPage))
+    }
+  }, [projects, projectPerPage])
 
   useEffect(() => {
     navigate(`${PublicRoutes.search}?` + params.toString())
@@ -111,7 +151,7 @@ export const Search: React.FC = () => {
           </div>
           <div className='flex flex-col items-center justify-center pb-12 pt-6'>
             <ul className='flex w-5/6 flex-wrap items-center justify-center gap-8'>
-              {projects?.length === 0 ? (
+              {projectShown?.length === 0 ? (
                 <div className='flex flex-col bg-gray-200'>
                   <div className='flex flex-col items-center justify-center'>
                     <h1 className='text-4xl font-medium'>No Results Found</h1>
@@ -122,11 +162,33 @@ export const Search: React.FC = () => {
                   </div>
                 </div>
               ) : (
-                projects?.map((project) => {
+                projectShown?.map((project) => {
                   return <ProjectCard key={project.id} project={project} />
                 })
               )}
             </ul>
+          </div>
+          <div className='mb-10 flex justify-center'>
+            <button
+              className='mr-20 w-[30px] text-xl text-backgroundDark1'
+              onClick={goToPreviousPage}
+              disabled={currentPage === 1}
+            >
+              <ArrowCircleLeftIcon
+                className='hover:text-gray-400'
+                style={{ fontSize: 70 }}
+              />
+            </button>
+            <button
+              className='mr-4 w-[30px] text-xl text-backgroundDark1'
+              onClick={goToNextPage}
+              disabled={currentPage === totalPages}
+            >
+              <ArrowCircleRightIcon
+                className='hover:text-gray-400'
+                style={{ fontSize: 70 }}
+              />
+            </button>
           </div>
         </div>
       </div>

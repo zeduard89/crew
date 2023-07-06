@@ -12,3 +12,4 @@ export const getSearchQuery = (queries: string): string | null => {
   const urlParams = new URLSearchParams(queries)
   return urlParams.get('q')
 }
+
