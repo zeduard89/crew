@@ -38,7 +38,9 @@ export const ProjectTable: React.FC<TableProps> = ({ responseData }) => {
           <tr key={project.id} className='text-white'>
             <td className='px-6 py-4'>{project.title}</td>
             <td className='px-6 py-4'>{project.category}</td>
-            <td className='px-6 py-4'>{project.fundingCurrent}</td>
+            <td className='px-6 py-4'>{`$  ${project.fundingCurrent.toLocaleString(
+              'en-US'
+            )}`}</td>
             <td className='px-6 py-4 text-sm'>
               {formatDate(project.createdAt)}
             </td>

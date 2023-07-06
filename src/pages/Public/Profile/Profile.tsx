@@ -5,7 +5,6 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { About, Contributions, SettingsForm, UserProjectsFav } from './views'
 import { MenuItem } from './components'
-import { showAlert } from '@/utils'
 
 enum UserMenuOptions {
   Profile = 'Profile',
@@ -29,14 +28,9 @@ export const Profile: React.FC = () => {
 
   const handleOnClick = async (option: UserMenuOptions): Promise<void> => {
     setUserMenu(option)
-
-    await showAlert({
-      title: 'Project was successfully created!',
-      text: 'This window will close...',
-      icon: 'success',
-      confirmButtonText: 'Lets Go!',
-    })
   }
+
+  const isUser: boolean = id === userId
 
   return (
     <div className='flex justify-center'>
@@ -79,17 +73,19 @@ export const Profile: React.FC = () => {
             currentOption={userMenu}
             onClick={handleOnClick}
           />
-          <MenuItem
-            menuOption={UserMenuOptions.Settings}
-            currentOption={userMenu}
-            onClick={handleOnClick}
-          />
+          {id === userId && (
+            <MenuItem
+              menuOption={UserMenuOptions.Settings}
+              currentOption={userMenu}
+              onClick={handleOnClick}
+            />
+          )}
         </div>
         <hr className='my-3 border border-primary' />
         {userMenu === UserMenuOptions.Profile && <About user={user} />}
         {userMenu === UserMenuOptions.Projects && <UserProjectsFav />}
         {userMenu === UserMenuOptions.Contributions && (
-          <Contributions userId={id} />
+          <Contributions userId={id} isUser={isUser} />
         )}
         {id === userId &&
           userMenu === UserMenuOptions.Settings &&

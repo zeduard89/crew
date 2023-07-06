@@ -6,23 +6,23 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
 
 export const UsersDashboard: React.FC = () => {
   const { mainInfo } = useDashboardMainInfo()
-  const enero =
+  const january =
     mainInfo?.chartRegisteredUsersPerMonth[0].totalRegisteredUsers ?? 0
-  const febrero =
+  const febraury =
     mainInfo?.chartRegisteredUsersPerMonth[1].totalRegisteredUsers ?? 0
-  const marzo =
+  const march =
     mainInfo?.chartRegisteredUsersPerMonth[2].totalRegisteredUsers ?? 0
-  const abril =
+  const april =
     mainInfo?.chartRegisteredUsersPerMonth[3].totalRegisteredUsers ?? 0
-  const mayo =
+  const may =
     mainInfo?.chartRegisteredUsersPerMonth[4].totalRegisteredUsers ?? 0
-  const junio =
+  const june =
     mainInfo?.chartRegisteredUsersPerMonth[5].totalRegisteredUsers ?? 0
-  const julio =
+  const july =
     mainInfo?.chartRegisteredUsersPerMonth[6].totalRegisteredUsers ?? 0
 
-  const allData = [[enero, febrero, marzo, abril, mayo, junio, julio]]
-  const title = 'Nuevos Usuarios por Mes [Un]'
+  const allData = [[january, febraury, march, april, may, june, july]]
+  const title = 'New users per month [Un]'
 
   let { allUsers } = useAllUsers()
   allUsers = allUsers?.sort((a, b) => {

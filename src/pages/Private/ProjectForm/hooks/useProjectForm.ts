@@ -55,6 +55,7 @@ export const useProjectForm = (): IProjectForm => {
       }
       if (projectId.message === undefined) return
       navigate(`${PublicRoutes.projects}/${projectId.message}`)
+      
     } catch (error) {
       console.log(error)
     }
