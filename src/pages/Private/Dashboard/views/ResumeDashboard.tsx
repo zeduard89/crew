@@ -1,4 +1,4 @@
-import { PieChart, SelectDash, LineChart } from '../components'
+import { PieChart, LineChart } from '../components'
 import BuildIcon from '@mui/icons-material/Build'
 import LocalAtmIcon from '@mui/icons-material/LocalAtm'
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline'
@@ -14,10 +14,10 @@ export const ResumeDashboard: React.FC = () => {
   const fundCommunty =
     mainInfo?.chartTotalFundsRaised.fundingCurrentCommunityCategory ?? 0
   const fundCreative =
-    mainInfo?.chartTotalFundsRaised.fundingCurrentCommunityCategory ?? 0
+    mainInfo?.chartTotalFundsRaised.fundingCurrentCreativeCategory ?? 0
   const fundTech =
-    mainInfo?.chartTotalFundsRaised.fundingCurrentCommunityCategory ?? 0
-  const data = [fundTech * 5, fundCreative * 2, fundCommunty / 2]
+    mainInfo?.chartTotalFundsRaised.fundingCurrentTechCategory ?? 0
+  const data = [fundTech, fundCreative, fundCommunty]
 
   const funds =
     mainInfo?.totalFundsRaised != null
@@ -130,10 +130,9 @@ export const ResumeDashboard: React.FC = () => {
       <div className='h-fit w-[495px] rounded-lg bg-backgroundDark1 p-3 '>
         <div className='flex h-12 items-center'>
           <div className='flex-1 pb-2 text-white'>
-            <h1 className='text-xl'>Title </h1>
-            <h1 className='text-sm font-thin'>Something</h1>
+            <h1 className='text-2xl'>Crew </h1>
+            <h1 className='text-sm font-thin'>Resume</h1>
           </div>
-          <SelectDash />
         </div>
         <div id='Contenedor' className='flex w-full justify-between text-white'>
           <div className='h-[350px] w-[310px] rounded-lg bg-backgroundDark3 p-5'>

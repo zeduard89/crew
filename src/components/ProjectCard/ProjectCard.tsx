@@ -15,10 +15,8 @@ export const CategoryRedirect = {
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
-
   // Extraer solo las URLs de las imágenes y asignarlas a la propiedad mainImage
-  const mainImageUrls =
-  project.projectImages?.map((image) => image.url) ?? []
+  const mainImageUrls = project.projectImages?.map((image) => image.url) ?? []
 
   const navigate = useNavigate()
   return (
@@ -76,11 +74,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                   {numberToUSD(project.fundingCurrent)}
                 </span>
                 <p className='ml-2 text-xs font-semibold uppercase text-gray-500'>
-                  USD raised
+                  ARG
                 </p>
               </div>
               <p className='text-sm font-semibold uppercase text-gray-500'>
-                {project.fundingPercentage}%
+                {Math.floor(project.fundingPercentage)}%
               </p>
             </div>
             <div className='relative pt-1'>

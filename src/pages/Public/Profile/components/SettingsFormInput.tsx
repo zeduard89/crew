@@ -9,6 +9,7 @@ interface SettingsFormInputProps {
   error: FieldError | undefined
   register: UseFormRegister<UserSettingsFormType>
   children?: React.ReactNode
+  readOnly?: boolean
 }
 
 export const SettingsFormInput: React.FC<SettingsFormInputProps> = ({
@@ -18,6 +19,7 @@ export const SettingsFormInput: React.FC<SettingsFormInputProps> = ({
   placeholder,
   register,
   error,
+  readOnly,
 }) => {
   return (
     <div className='mb-4 flex flex-col'>
@@ -34,6 +36,7 @@ export const SettingsFormInput: React.FC<SettingsFormInputProps> = ({
         placeholder={placeholder}
         {...register(name)}
         className='w-[520px] rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none'
+        readOnly={readOnly ?? false}
       />
       {error != null && (
         <span className='ml-3 text-sm font-semibold text-red-600'>

@@ -34,7 +34,7 @@ export const Contributions: React.FC<ContributionsProps> = ({
   return (
     <div>
       {responseData !== null && responseData.length > 0 ? (
-        <div className='flex h-[550px] flex-col'>
+        <div className='mb-8 flex min-h-[550px] flex-col'>
           <Table responseData={responseData} isUser={isUser} />
         </div>
       ) : (

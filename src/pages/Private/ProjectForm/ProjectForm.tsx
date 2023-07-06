@@ -2,6 +2,7 @@ import { LoadingIcon } from '@/assets/LoadingIcon'
 import { useQueryClient } from '@tanstack/react-query'
 import { ProjectInput, ProjectInputSelect, ProjectTextArea } from './components'
 import { useProjectForm } from './hooks'
+import { showAlert } from '@/utils'
 
 export const ProjectForm: React.FC = () => {
   const {
@@ -11,11 +12,19 @@ export const ProjectForm: React.FC = () => {
     onSubmit,
     isSubmitSuccessful,
     isSubmitting,
+    reset,
   } = useProjectForm()
   const queryClient = useQueryClient()
 
   if (isSubmitSuccessful) {
+    reset()
     void queryClient.invalidateQueries(['popularProjects'])
+    void showAlert({
+      title: 'Project was successfully created!',
+      text: 'This window will close...',
+      icon: 'success',
+      confirmButtonText: 'Lets Go!',
+    })
   }
 
   return (
@@ -89,7 +98,7 @@ export const ProjectForm: React.FC = () => {
           label='Location'
           errors={errors}
           defaultOption='Select a location'
-          options={['Argentina','Mexico']}
+          options={['Argentina', 'Mexico']}
         />
 
         <div className='my-4 mb-6 flex flex-col'>

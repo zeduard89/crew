@@ -15,6 +15,7 @@ export const useProjectForm = (): IProjectForm => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<ProjectFormType>({
     mode: 'onBlur',
@@ -58,7 +59,7 @@ export const useProjectForm = (): IProjectForm => {
       
     } catch (error) {
       console.log(error)
-    }
+    } 
   }
 
   return {
@@ -68,5 +69,6 @@ export const useProjectForm = (): IProjectForm => {
     isSubmitting,
     onSubmit,
     isSubmitSuccessful,
+    reset,
   }
 }

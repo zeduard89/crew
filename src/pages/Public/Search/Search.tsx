@@ -22,9 +22,6 @@ export const Search: React.FC = () => {
   const navigate = useNavigate()
   const params = URLParams({ showState })
 
-  console.log(showState)
-  console.log(params.toString())
-
   const { projects } = useSearch({ params })
   const inputRef = useRef<HTMLInputElement>(null)
 

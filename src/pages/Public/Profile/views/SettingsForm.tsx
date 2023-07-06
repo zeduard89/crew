@@ -111,6 +111,7 @@ export const SettingsForm: React.FC<SettingsProps> = ({ user }) => {
           placeholder='Your email'
           register={register}
           error={errors.updateEmail}
+          readOnly={true}
         />
 
         <SettingsFormInput
@@ -170,8 +171,6 @@ export const SettingsForm: React.FC<SettingsProps> = ({ user }) => {
                 'This field is required'}
             </span>
           )}
-
-          
         </div>
 
         <div className='my-4 mb-6 flex flex-col'>
