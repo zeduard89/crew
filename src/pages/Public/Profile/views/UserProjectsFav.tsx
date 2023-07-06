@@ -1,14 +1,20 @@
 import { FavoritesCarrousel } from '@/components'
 import { useFavoriteProjects } from '@/hooks'
 import { useUserIdStore } from '@/store'
+import { CreatorProjects } from '../components'
 
 export const UserProjectsFav: React.FC = () => {
   const { userId } = useUserIdStore()
   const { favoriteProjects } = useFavoriteProjects(userId)
   if (favoriteProjects !== undefined && favoriteProjects.length > 0) {
     return (
-      <div className='h-[680px]'>
-        <FavoritesCarrousel width={'w-full'} margin={'mt-2 '} />
+      <div className='min-h-[680px]'>
+        <div className='h-auto'>
+          <CreatorProjects width={'w-full'} margin={'mt-2 '} />
+        </div>
+        <div className='h-auto'>
+          <FavoritesCarrousel width={'w-full'} margin={'mt-2 '} />
+        </div>
       </div>
     )
   }

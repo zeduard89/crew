@@ -1,3 +1,4 @@
+export * from './CreatorProjects';
 export * from './MenuItem';
 export * from './SettingsFormInput';
 export * from './Table';
