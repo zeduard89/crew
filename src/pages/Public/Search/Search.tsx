@@ -40,14 +40,14 @@ export const Search: React.FC = () => {
               Crew Projects
             </h2>
             <p className='pb-3 pt-1 text-xl'>
-              Fund new and groundbreaking projects, including hits from
-              Indiegogo InDemand
+              Fund new and groundbreaking projects, including hits from Crew
+              InDemand
             </p>
           </div>
         </div>
         <img
           src='https://images.wallpaperscraft.com/image/single/coast_sea_rock_960168_3840x2400.jpg'
-          alt=''
+          alt='Image crew pa!'
         />
       </div>
       <div className='flex flex-row'>

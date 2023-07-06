@@ -12,7 +12,7 @@ export const NavBar: React.FC = () => {
   const navigate = useNavigate()
   const location = useLocation().pathname
   useAuthHandler()
-  const {  isLoaded} = useUserIdStore()
+  const { isLoaded } = useUserIdStore()
   const { modalAuth, setModalAuth } = useModalAuthStore()
 
   return (
@@ -61,9 +61,8 @@ export const NavBar: React.FC = () => {
               </button>
             </>
           )}
-          {isLoaded  && (
+          {isLoaded && (
             <div className='flex items-center'>
-              
               <ProfileDropdown />
             </div>
           )}
