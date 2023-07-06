@@ -161,6 +161,8 @@ export const SettingsForm: React.FC<SettingsProps> = ({ user }) => {
                 'This field is required'}
             </span>
           )}
+
+          
         </div>
         <div className='my-4 mb-6 flex flex-col'>
           <label htmlFor='avatar' className='mb-2 block text-lg font-semibold'>

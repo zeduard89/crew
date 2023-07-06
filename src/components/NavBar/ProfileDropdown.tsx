@@ -19,7 +19,7 @@ export const ProfileDropdown: React.FC = () => {
     return <LoadingIcon />
   }
 
-  const adminId = '420fdf38-78f9-4be4-99b7-b9ab93afee85'
+  const adminId = 'c79a6117-bb44-4a22-855a-58130a075735'
 
   return (
     <>

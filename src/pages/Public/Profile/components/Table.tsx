@@ -5,6 +5,7 @@ interface TableProps {
   responseData: IPayments[]
 }
 
+
 export const Table: React.FC<TableProps> = ({ responseData }) => {
   return (
     <table className='min-w-full divide-y divide-gray-200'>
@@ -23,6 +24,8 @@ export const Table: React.FC<TableProps> = ({ responseData }) => {
             <td className='px-6 py-4'>{payment.description}</td>
             <td className='px-6 py-4'>{payment.firstName}</td>
             <td className='px-6 py-4'>{payment.transactionAmount}</td>
+        
+
             <td className='px-6 py-4'>{formatDate(payment.dateApproved)}</td>
             <td className='px-6 py-4'>{payment.ordertype}</td>
           </tr>
