@@ -6,7 +6,6 @@ interface TableProps {
   isUser: boolean
 }
 
-
 export const Table: React.FC<TableProps> = ({ responseData, isUser }) => {
   return (
     <table className='min-w-full divide-y divide-gray-200'>
