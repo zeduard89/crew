@@ -70,8 +70,6 @@ export const SettingsForm: React.FC<SettingsProps> = ({ user }) => {
         })
       }
 
-
-
       void queryClient.invalidateQueries(['user', user.id])
     } catch (error) {
       console.log('No se pudieron actualizar los datos', error)
@@ -133,14 +131,25 @@ export const SettingsForm: React.FC<SettingsProps> = ({ user }) => {
           error={errors.updateCity}
         />
 
-        <SettingsFormInput
-          label='About Me'
-          name='updateAboutMe'
-          type='text'
-          placeholder='Tell something about your self'
-          register={register}
-          error={errors.updateAboutMe}
-        />
+        <div className='mb-4 flex flex-col'>
+          <label
+            htmlFor='aboutMe'
+            className='mb-2 block text-lg font-bold text-gray-500'
+          >
+            About Me:
+          </label>
+          <textarea
+            id='updateAboutMe'
+            placeholder='Tell something about your self'
+            {...register('updateAboutMe')}
+            className='h-20 w-[520px] rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none'
+          />
+          {errors.updateAboutMe != null && (
+            <span className='ml-3 text-sm font-semibold text-red-600'>
+              {errors.updateAboutMe?.message ?? 'This field is required'}
+            </span>
+          )}
+        </div>
 
         <div className='mb-4 flex flex-col'>
           <label
@@ -162,6 +171,7 @@ export const SettingsForm: React.FC<SettingsProps> = ({ user }) => {
             </span>
           )}
         </div>
+
         <div className='my-4 mb-6 flex flex-col'>
           <label htmlFor='avatar' className='mb-2 block text-lg font-semibold'>
             Avatar:

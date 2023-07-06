@@ -28,7 +28,7 @@ export const FavoritesCarrousel: React.FC<FavoritesCarrouselProps> = (
   if (favoriteProjects !== undefined && favoriteProjects.length > 0) {
     return (
       <div>
-        <h2 className={`${props.margin}text-3xl`}>
+        <h2 className={`${props.margin}text-2xl font-semibold text-primary`}>
           Projects you are following
         </h2>
         <Swiper

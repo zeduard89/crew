@@ -6,11 +6,11 @@ export const UserValidation = z.object({
   updateName: z
     .string()
     .min(3, 'El nombre debe tener al menos 3 caracteres')
-    .max(15, 'El nombre debe tener menos de 10 caracteres'),
+    .max(15, 'El nombre debe tener menos de 15 caracteres'),
   updateLastName: z
     .string()
     .min(3, 'El apellido debe tener al menos 3 caracteres')
-    .max(15, 'El apellido debe tener menos de 10 caracteres'),
+    .max(15, 'El apellido debe tener menos de 15 caracteres'),
   updateEmail: z
     .string()
     .min(5, 'El correo electrónico debe tener al menos 5 caracteres')
@@ -22,19 +22,19 @@ export const UserValidation = z.object({
   updateCountry: z
     .string()
     .min(3, 'El país debe tener al menos 3 caracteres')
-    .max(15, 'El país debe tener menos de 10 caracteres'),
+    .max(15, 'El país debe tener menos de 15 caracteres'),
   updateCity: z
     .string()
     .min(3, 'La ciudad debe tener al menos 3 caracteres')
-    .max(20, 'La ciudad debe tener menos de 10 caracteres'),
+    .max(20, 'La ciudad debe tener menos de 20 caracteres'),
   updateAboutMe: z
     .string()
-    .min(10, 'La descripción debe tener al menos 10 caracteres')
-    .max(100, 'La descripción debe tener menos de 100 caracteres'),
+    .min(20, 'La descripción debe tener al menos 20 caracteres')
+    .max(500, 'La descripción debe tener menos de 500 caracteres'),
   updateShortDescription: z
     .string()
-    .min(3, 'La descripción corta debe tener al menos 3 caracteres')
-    .max(100, 'La descripción corta debe tener menos de 40 caracteres'),
+    .min(5, 'La descripción corta debe tener al menos 5 caracteres')
+    .max(200, 'La descripción corta debe tener menos de 200 caracteres'),
   updateProfilePicture: z.custom<File[]>(
     (files) => {
       if (files instanceof FileList) {
@@ -48,12 +48,3 @@ export const UserValidation = z.object({
 })
 
 export type UserSettingsFormType = z.infer<typeof UserValidation>
-
-// Para confirmar con un mail enviado
-
-// confirmEmail: z
-// .string()
-// .refine((value, ctx) => value === ctx.email, {
-//   message: 'Los campos de correo electrónico deben coincidir',
-//   path: ['confirmEmail'],
-// }),
